@@ -138,13 +138,42 @@ source("R/02_mapa_base.R")        # mapa estático + interactivo
 El script descarga los shapefiles desde el geoportal, los reproyecta a EPSG:25830, valida la geometría y deriva el polígono del término municipal por unión de los 21 distritos.
 :::
 
-## 2.2 Capas temáticas
+## 2.2 Capas temáticas (OpenStreetMap)
 
-> _OpenStreetMap (gimnasios, comida saludable, fast food, parques) — siguiente iteración._
+| Capa | Tags OSM utilizados | Total POIs |
+|---|---|---:|
+| Comida saludable | `shop=greengrocer`, `shop=health_food`, `shop=herbalist`, `shop=deli`, `shop=nutrition_supplements`, `shop=farm`, `amenity=marketplace` | **1.835** |
+| Actividad física | `leisure=fitness_centre`, `leisure=fitness_station`, `leisure=sports_centre` | **5.971** |
+| Comida rápida | `amenity=fast_food` | **1.454** |
+| Espacios verdes | `leisure=park`, `landuse=forest` (≥ 1.000 m²) | **1.934** |
+
+::: {.callout-note}
+**Decisión metodológica.** Los tags de la capa "comida saludable" se eligen tras verificar contra Taginfo y la API Overpass que `shop=organic` (0 elementos) y `marketplace=farmers_market` (0 elementos) no se utilizan en Madrid, mientras que `shop=supermarket` es demasiado laxo (incluye Mercadona, Lidl, etc.). Se priorizan tiendas especializadas y mercados.
+:::
 
 # 3 · Densidades y distancias {#sec-densidades}
 
-> _Sección a completar._
+## 3.1 KDE proyectado
+
+La estimación de densidad por kernel se calcula sobre el sistema **EPSG:25830** (metros) — corrigiendo el error metodológico de la versión original, que ejecutaba el KDE en grados geográficos. El bandwidth se calcula automáticamente con la regla de Scott vía `spatstat::bw.scott()`.
+
+```{r kde-panel}
+#| label: fig-kde
+#| fig-cap: "Densidad de equipamientos por km² (KDE 100 m, recortado al municipio)."
+#| fig-width: 16
+#| fig-height: 7
+#| echo: false
+
+knitr::include_graphics("outputs/figures/02_kde_panel.png")
+```
+
+Las tres capas tienen estructuras espaciales diferentes:
+
+- **Comida saludable** muestra un núcleo intenso en Centro (mercados históricos) y picos secundarios en distritos residenciales acomodados (Salamanca, Chamberí).
+- **Actividad física** está distribuida de forma más homogénea por toda la ciudad, con concentraciones en distritos centrales y ensanches.
+- **Comida rápida** se concentra en el Centro (turismo) y en arterias comerciales periféricas.
+
+> _Análisis a nivel barrio + isocronas peatonales — siguiente iteración._
 
 # 4 · Índice de Vida Saludable {#sec-ivs}
 
