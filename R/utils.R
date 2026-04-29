@@ -23,6 +23,24 @@ maptiler_tiles <- function(style = "streets-v2") {
   sprintf("https://api.maptiler.com/maps/%s/{z}/{x}/{y}.png?key=%s", style, maptiler_key())
 }
 
+#' Configura pandoc apuntando al binario embebido en Quarto.
+#' Necesario para `htmlwidgets::saveWidget(selfcontained = TRUE)` en Windows
+#' cuando no hay un Pandoc instalado en el sistema.
+configurar_pandoc <- function() {
+  rutas <- c(
+    file.path(Sys.getenv("LOCALAPPDATA"), "Programs/Quarto/bin/tools/pandoc.exe"),
+    file.path(Sys.getenv("LOCALAPPDATA"), "Programs/Quarto/bin/tools/x86_64/pandoc.exe"),
+    file.path(Sys.getenv("ProgramFiles"), "RStudio/bin/quarto/bin/tools/pandoc.exe")
+  )
+  pandoc <- rutas[file.exists(rutas)][1]
+  if (is.na(pandoc)) {
+    warning("No se encontró pandoc.exe; saveWidget(selfcontained=TRUE) puede fallar.")
+    return(invisible(NULL))
+  }
+  Sys.setenv(RSTUDIO_PANDOC = dirname(pandoc))
+  invisible(pandoc)
+}
+
 #' Normaliza un raster o vector numérico al rango [0, 1].
 normalizar_01 <- function(x, invertir = FALSE) {
   rng <- range(x, na.rm = TRUE)

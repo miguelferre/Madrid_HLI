@@ -111,7 +111,36 @@ flowchart LR
 
 # 2 · Datos {#sec-datos}
 
-> _Sección a completar en la siguiente iteración._
+## 2.1 Marco administrativo
+
+El análisis se hace sobre el **término municipal de Madrid** (604 km²), desagregado en sus **21 distritos** y **131 barrios** oficiales.
+
+```{r mapa-base}
+#| label: fig-mapa-base
+#| fig-cap: "Madrid municipio: 21 distritos y 131 barrios. Fuente: Ayuntamiento de Madrid · Geoportal IDEAM (CC BY 4.0)."
+#| fig-width: 9
+#| fig-height: 9
+#| echo: false
+
+knitr::include_graphics("outputs/figures/01_distritos_barrios.png")
+```
+
+Los datos administrativos se descargan automáticamente del [Geoportal IDEAM](https://geoportal.madrid.es/) y se almacenan localmente en `data/processed/` como GeoPackage en CRS **EPSG:25830** (ETRS89 / UTM 30N), el sistema oficial para España peninsular.
+
+::: {.callout-tip collapse="true"}
+## Reproducibilidad: ¿cómo se obtienen estos datos?
+
+```r
+source("R/01_descargar_datos.R")  # descarga + limpieza
+source("R/02_mapa_base.R")        # mapa estático + interactivo
+```
+
+El script descarga los shapefiles desde el geoportal, los reproyecta a EPSG:25830, valida la geometría y deriva el polígono del término municipal por unión de los 21 distritos.
+:::
+
+## 2.2 Capas temáticas
+
+> _OpenStreetMap (gimnasios, comida saludable, fast food, parques) — siguiente iteración._
 
 # 3 · Densidades y distancias {#sec-densidades}
 
