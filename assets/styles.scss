@@ -1,0 +1,67 @@
+/*-- scss:defaults --*/
+
+// Tipografía
+$font-family-sans-serif: "Inter", "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$font-family-monospace: "JetBrains Mono", "Fira Code", Consolas, monospace;
+$headings-font-weight: 600;
+
+// Paleta — verdes urbanos, neutros cálidos
+$primary: #2c7a4b;     // verde Madrid
+$secondary: #d97706;   // ámbar acento
+$body-color: #1f2937;
+$body-bg: #fafaf7;
+$link-color: #2c7a4b;
+
+// Bordes y sombras suaves
+$border-radius: 6px;
+$border-radius-lg: 10px;
+
+/*-- scss:rules --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap');
+
+body {
+  letter-spacing: -0.005em;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
+// Tarjetas KPI tipo "stat"
+.grid .g-col-4.text-center h2,
+.grid .g-col-4.text-center h3 {
+  font-size: 2.4rem;
+  margin: 0.6rem 0 0.2rem;
+  color: $primary;
+}
+
+.grid .g-col-4.text-center {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: $border-radius-lg;
+  padding: 1.2rem 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+// Callouts más limpios
+.callout {
+  border-radius: $border-radius;
+}
+
+// Pie de figura
+.figure-caption, .quarto-figure-caption {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+// Bloques de código más legibles
+pre.sourceCode {
+  border-radius: $border-radius;
+  font-size: 0.88rem;
+}
+
+// TOC sticky
+#TOC {
+  font-size: 0.92rem;
+}

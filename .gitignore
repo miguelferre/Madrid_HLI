@@ -44,3 +44,5 @@ desktop.ini
 # --- Outputs pesados temporales ---
 *.log
 tmp/
+
+**/*.quarto_ipynb

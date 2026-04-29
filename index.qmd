@@ -1,0 +1,159 @@
+---
+title: "Madrid · Healthy Living Index"
+subtitle: "Análisis espacial de la habitabilidad saludable y la regla 3-30-300"
+author: "Miguel Ferreiro García"
+date: today
+date-format: "MMMM YYYY"
+lang: es
+format:
+  html:
+    theme:
+      - cosmo
+      - assets/styles.scss
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    toc-title: "Contenido"
+    code-fold: true
+    code-tools: true
+    code-summary: "Mostrar código"
+    fig-width: 10
+    fig-height: 7
+    fig-align: center
+    embed-resources: false
+    smooth-scroll: true
+    page-layout: full
+    grid:
+      sidebar-width: 280px
+      body-width: 1100px
+      margin-width: 220px
+execute:
+  freeze: auto
+  warning: false
+  message: false
+  echo: true
+knitr:
+  opts_chunk:
+    dev: png
+    dpi: 144
+---
+
+```{r setup}
+#| include: false
+
+# Cargar utilidades del proyecto
+source("R/utils.R")
+
+# Paquetes principales (se cargarán bajo demanda en cada sección)
+suppressPackageStartupMessages({
+  library(sf)
+  library(dplyr)
+  library(ggplot2)
+})
+```
+
+::: {.callout-note appearance="simple"}
+**Estado del documento:** en construcción. Esta versión es el esqueleto inicial; las secciones se irán completando de forma incremental con datos reales.
+:::
+
+# Resumen ejecutivo {.unnumbered}
+
+¿Es Madrid una ciudad fácil para llevar una vida saludable? ¿Y lo es **igual de fácil** en todos sus barrios?
+
+Este documento responde a esas preguntas combinando datos abiertos (OpenStreetMap, INE, Ayuntamiento de Madrid, satélite Sentinel/Meta) con análisis espacial en R. El resultado es un **Índice de Vida Saludable (IVS)** por barrio y una evaluación del cumplimiento de la **regla 3-30-300** de urbanismo verde.
+
+::: {.grid}
+::: {.g-col-4 .text-center}
+### **131**
+barrios analizados
+:::
+::: {.g-col-4 .text-center}
+### **5**
+capas de entrada
+:::
+::: {.g-col-4 .text-center}
+### **3-30-300**
+estándar de referencia
+:::
+:::
+
+# 1 · Marco metodológico
+
+## 1.1 Pregunta de investigación
+
+Cuantificar, a nivel de barrio, la facilidad para llevar un estilo de vida saludable en el municipio de Madrid, integrando:
+
+- **Acceso a alimentación saludable** (fruterías, mercados, tiendas especializadas).
+- **Acceso a actividad física** (gimnasios, instalaciones deportivas).
+- **Cercanía a espacios verdes** (parques mayores de 15 ha).
+- **Penetración de comida rápida** como factor inverso.
+- **Cubierta arbórea** y proximidad a verde urbano (regla 3-30-300).
+- **Equidad**: ¿se distribuye el índice de forma justa respecto a la renta?
+
+## 1.2 Pipeline de análisis
+
+```{mermaid}
+%%| label: fig-pipeline
+%%| fig-cap: "Pipeline de análisis"
+
+flowchart LR
+  A[OSM<br/>Overpass] --> B[Limpieza<br/>+ filtrado]
+  C[Ayto Madrid<br/>distritos, barrios, arbolado] --> B
+  D[INE<br/>renta + sec. censales] --> B
+  E[Meta Canopy<br/>Height 1m] --> B
+  B --> F[KDE proyectado<br/>EPSG:25830]
+  B --> G[Isocronas<br/>peatonales dodgr]
+  F --> H[Índice IVS<br/>por barrio]
+  G --> H
+  H --> I[Cruce con renta<br/>+ regla 3-30-300]
+  I --> J[Mapas + dashboard]
+```
+
+# 2 · Datos {#sec-datos}
+
+> _Sección a completar en la siguiente iteración._
+
+# 3 · Densidades y distancias {#sec-densidades}
+
+> _Sección a completar._
+
+# 4 · Índice de Vida Saludable {#sec-ivs}
+
+> _Sección a completar._
+
+# 5 · La regla 3-30-300 {#sec-regla}
+
+La regla **3-30-300** propuesta por Cecil Konijnendijk (2021) es un estándar simple y accionable de urbanismo verde:
+
+::: {.grid}
+::: {.g-col-4 .text-center}
+## 3
+**árboles visibles** desde cada vivienda
+:::
+::: {.g-col-4 .text-center}
+## 30 %
+**cubierta arbórea** por barrio
+:::
+::: {.g-col-4 .text-center}
+## 300 m
+al **espacio verde** más cercano
+:::
+:::
+
+> _Análisis a completar._
+
+# 6 · Equidad y conclusiones {#sec-equidad}
+
+> _Sección a completar._
+
+# Apéndice · Reproducibilidad {.appendix}
+
+```{r session-info}
+#| code-fold: true
+#| code-summary: "Información de la sesión R"
+sessionInfo()
+```
+
+::: {.callout-tip appearance="simple"}
+**Código fuente:** [github.com/MiguelFerreiro/Madrid_HLI](https://github.com/MiguelFerreiro/Madrid_HLI) (próximamente)
+:::
