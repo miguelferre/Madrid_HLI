@@ -1,0 +1,5 @@
+# Plantilla de variables de entorno. Copia este archivo a .Renviron
+# y rellena las claves. NUNCA subas .Renviron al repositorio.
+
+# MapTiler — basemaps premium. Crea una cuenta gratis en https://cloud.maptiler.com
+MAPTILER_API_KEY=tu_clave_aqui

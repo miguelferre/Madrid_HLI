@@ -1,0 +1,23 @@
+project:
+  type: default
+  output-dir: docs
+
+execute:
+  freeze: auto
+  warning: false
+  message: false
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    code-fold: true
+    code-tools: true
+    code-summary: "Mostrar código"
+    fig-width: 10
+    fig-height: 7
+    embed-resources: false
+    smooth-scroll: true
+    lang: es

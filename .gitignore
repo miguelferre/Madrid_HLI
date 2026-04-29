@@ -1,0 +1,46 @@
+# --- Claude Code ---
+.claude/
+
+# --- R ---
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+*.Rcheck/
+*.tar.gz
+
+# --- renv (el lockfile SÍ se commitea, las librerías no) ---
+renv/library/
+renv/local/
+renv/cellar/
+renv/lock/
+renv/python/
+renv/staging/
+
+# --- Datos crudos (descargables públicos, no se versionan) ---
+data/raw/
+*.osm.pbf
+*.zip
+*.tif
+
+# --- Quarto / Jupyter ---
+.quarto/
+_freeze/
+.ipynb_checkpoints/
+*_files/
+/.quarto/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Editores ---
+.vscode/
+*.swp
+*~
+
+# --- Outputs pesados temporales ---
+*.log
+tmp/
