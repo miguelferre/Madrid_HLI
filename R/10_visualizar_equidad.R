@@ -249,13 +249,13 @@ popup_html <- function(d) {
 }
 popups <- vapply(seq_len(nrow(hli_geo)), \(i) popup_html(hli_geo[i, ]), character(1))
 
-attrib_maptiler <- '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+attrib_maptiler <- basemap_attribution()
 
 mapa <- leaflet(options = leafletOptions(zoomControl = TRUE,
                                           minZoom = 10, maxZoom = 16)) |>
-  addTiles(urlTemplate = maptiler_tiles("dataviz-light"),
+  addTiles(urlTemplate = basemap_tiles("positron"),
             attribution = attrib_maptiler,
-            group = "MapTiler · DataViz light") |>
+            group = "CartoDB Positron") |>
   addPolygons(
     data = hli_geo, fillColor = pal_hli(hli_geo$HLI), fillOpacity = 0.85,
     color = "white", weight = 0.5, opacity = 0.9,
@@ -305,7 +305,7 @@ mapa <- leaflet(options = leafletOptions(zoomControl = TRUE,
              title = "HLI residual", opacity = 1, bins = 5,
              group = "HLI residual (vs. renta)") |>
   addLayersControl(
-    baseGroups = "MapTiler · DataViz light",
+    baseGroups = "CartoDB Positron",
     overlayGroups = c("HLI", "Renta neta / persona",
                       "HLI residual (vs. renta)", "Distritos"),
     options = layersControlOptions(collapsed = FALSE)

@@ -55,15 +55,18 @@ Este documento responde a esas preguntas combinando datos abiertos (OpenStreetMa
 
 ::: {.grid}
 ::: {.g-col-4 .text-center}
-### **131**
+[**131**]{.stat-number}
+
 barrios analizados
 :::
 ::: {.g-col-4 .text-center}
-### **−0,26**
+[**−0,26**]{.stat-number}
+
 correlación HLI ↔ renta (Pearson)
 :::
 ::: {.g-col-4 .text-center}
-### **9 %**
+[**9 %**]{.stat-number}
+
 mediana de barrios que cumplen las tres reglas 3-30-300
 :::
 :::
@@ -116,8 +119,7 @@ El análisis se hace sobre el **término municipal de Madrid** (604 km²), desag
 ```{r mapa-base}
 #| label: fig-mapa-base
 #| fig-cap: "Madrid municipio: 21 distritos y 131 barrios. Fuente: Ayuntamiento de Madrid · Geoportal IDEAM (CC BY 4.0)."
-#| fig-width: 9
-#| fig-height: 9
+#| echo: false
 
 knitr::include_graphics("outputs/figures/01_distritos_barrios.png")
 ```
@@ -161,8 +163,7 @@ La estimación de densidad por kernel se calcula sobre el sistema **EPSG:25830**
 ```{r kde-panel}
 #| label: fig-kde
 #| fig-cap: "Densidad de equipamientos por km² (KDE 100 m, recortado al municipio)."
-#| fig-width: 16
-#| fig-height: 7
+#| echo: false
 
 knitr::include_graphics("outputs/figures/02_kde_panel.png")
 ```
@@ -180,8 +181,7 @@ Sobre la red de calles del extracto Geofabrik (152 K segmentos, 605 K vértices)
 ```{r acc-panel}
 #| label: fig-acc
 #| fig-cap: "Accesibilidad peatonal a parques ≥ 1 ha. Cuanto más oscuro, más nodos del barrio cumplen el umbral."
-#| fig-width: 14
-#| fig-height: 8
+#| echo: false
 
 knitr::include_graphics("outputs/figures/09_panel_accesibilidad.png")
 ```
@@ -203,9 +203,8 @@ Cada indicador se normaliza al rango [0, 1] usando rango robusto (percentiles 5�
 
 ```{r hli-mapa}
 #| label: fig-hli
-#| fig-cap: "Healthy Living Index por barrio."
-#| fig-width: 10
-#| fig-height: 10
+#| fig-cap: "Healthy Living Index por barrio. Aparecen rotulados los **5 barrios con mayor HLI** (verdes oscuros — Comillas, Abrantes, Pradolongo, Zofío, San Isidro) y los **5 con menor HLI** (rojos — Sol, Justicia, Universidad, Embajadores, Goya)."
+#| echo: false
 
 knitr::include_graphics("outputs/figures/03_hli_choropleth.png")
 ```
@@ -215,22 +214,28 @@ knitr::include_graphics("outputs/figures/03_hli_choropleth.png")
 ```{r hli-renta}
 #| label: fig-equidad
 #| fig-cap: "HLI frente a renta neta por persona (€/año, INE ADRH 2023). Cada punto es un barrio. Línea de regresión en rojo."
-#| fig-width: 10
-#| fig-height: 7
+#| echo: false
+#| out-width: "100%"
 
 knitr::include_graphics("outputs/figures/05_hli_vs_renta.png")
 ```
 
 El **HLI correlaciona negativamente con la renta** (Pearson **−0,26**, Spearman −0,25). Los barrios con mejor dotación pública para una vida saludable se concentran en el **sur obrero** (Carabanchel, Usera, Puente de Vallecas); los barrios de mayor renta del **norte** (Salamanca, Chamartín, Moncloa) caen al fondo del ranking.
 
-| | alto HLI | bajo HLI |
-|---|---|---|
-| **renta alta** | 30 barrios | 36 barrios — *trampas* |
-| **renta baja** | 36 barrios — *gangas* | 29 barrios |
+Cruzando los 131 barrios por cuadrantes (HLI por encima/debajo de la mediana, renta neta por encima/debajo de la mediana):
 
-- *Top "gangas":* Comillas, Abrantes, Pradolongo, Zofío, San Isidro
-- *Top "trampas":* Valdemarín, Recoletos, Fuentelarreina, El Viso, Castellana
-- *Caso extremo:* Sol — HLI 0,12, 123 fast food/km², 0 % cubierta verde
+| | alto HLI | bajo HLI |
+|---|---:|---:|
+| **renta alta** | 30 barrios | 36 barrios |
+| **renta baja** | 36 barrios | 29 barrios |
+
+Algunos barrios concretos para anclar la lectura:
+
+- **Renta alta · alto HLI:** Cuatro Caminos, Berruguete, Pacífico, Imperial.
+- **Renta alta · bajo HLI:** Valdemarín, Recoletos, Fuentelarreina, El Viso, Castellana.
+- **Renta baja · alto HLI:** Comillas, Abrantes, Pradolongo, Zofío, San Isidro.
+- **Renta baja · bajo HLI:** El Cañaveral, Las Águilas, Aluche, San Cristóbal.
+- **Caso extremo:** Sol — HLI 0,12, 123 fast food/km², 0 % cubierta verde, renta media.
 
 # 5 · La regla 3-30-300 {#sec-regla}
 
@@ -238,15 +243,18 @@ La regla **3-30-300** propuesta por Cecil Konijnendijk (2021) es un estándar si
 
 ::: {.grid}
 ::: {.g-col-4 .text-center}
-### 3
+[**3**]{.stat-number}
+
 **árboles visibles** desde cada vivienda
 :::
 ::: {.g-col-4 .text-center}
-### 30 %
+[**30 %**]{.stat-number}
+
 **cubierta arbórea** por barrio
 :::
 ::: {.g-col-4 .text-center}
-### 300 m
+[**300 m**]{.stat-number}
+
 al **espacio verde** más cercano
 :::
 :::
@@ -264,8 +272,7 @@ Hemos evaluado las tres reglas sobre **605 K nodos del callejero** de Madrid:
 ```{r regla-panel}
 #| label: fig-3-30-300
 #| fig-cap: "Las tres reglas y el score combinado por barrio. Madrid suspende: solo el 9 % mediano de los barrios cumple las tres a la vez."
-#| fig-width: 16
-#| fig-height: 16
+#| echo: false
 
 knitr::include_graphics("outputs/figures/14_panel_3_30_300.png")
 ```
@@ -279,6 +286,10 @@ knitr::include_graphics("outputs/figures/14_panel_3_30_300.png")
 
 ::: {.callout-tip}
 **Tensión Salamanca.** Castellana, Goya y Lista alcanzan el **100 %** en regla 3 (alineaciones viarias densas de árboles inventariados) pero **0 %** en regla 30: los árboles individuales de viario no llegan al 30 % de cubierta continua según ESA WorldCover. El estándar 3-30-300 está diseñado precisamente para detectar esta diferencia entre "hay árboles" y "hay barrio verde".
+:::
+
+::: {.callout-note}
+**El caso opuesto: El Pardo.** Aparece como casi suspenso en regla 3 (3,1 %) pero brilla en regla 30 (65,8 %). La explicación está en cómo "ve" cada regla la realidad: la regla 3 se apoya en el **inventario municipal** del Ayto, que cataloga los árboles bajo gestión y mantenimiento explícitos —arbolado viario, jardines, parques históricos—. El Pardo es un parque **forestal y reserva real** cuya masa boscosa **no se inventaría árbol a árbol** (no es viable ni tendría sentido catalogar individualmente cientos de miles de pinos y encinas en una superficie de 18.700 ha). En cambio, ESA WorldCover mide la cubierta arbórea **directamente desde satélite** y sí captura ese bosque continuo. La regla 30 es por tanto el indicador correcto en zonas no urbanizadas; la regla 3 funciona bien en trama urbana densa. Lo mismo ocurre, en menor medida, en Casa de Campo y El Goloso.
 :::
 
 # 6 · Equidad
@@ -355,8 +366,7 @@ quarto::quarto_render("index.qmd")
 ```
 
 ```{r session-info}
-#| code-fold: true
-#| code-summary: "Información de la sesión R"
+#| echo: false
 sessionInfo()
 ```
 

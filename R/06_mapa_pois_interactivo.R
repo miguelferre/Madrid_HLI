@@ -1,7 +1,7 @@
 #' Mapa interactivo filtrable de los POIs OSM (validación visual).
 #'
 #' Carga las 4 capas de POIs (`data/processed/osm_*.gpkg`) y las representa
-#' sobre el municipio con MapTiler dataviz-light. Cada subtag (`tipo`) es una
+#' sobre el municipio con CartoDB Positron. Cada subtag (`tipo`) es una
 #' capa independiente, toggleable, con color distinto, popup `name + tipo`
 #' y buscador por nombre.
 #'
@@ -73,20 +73,20 @@ overlay_groups <- c()
 
 # Mapa base --------------------------------------------------------------------
 
-attrib_maptiler <- '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+attrib_maptiler <- basemap_attribution()
 
 mapa <- leaflet(
   options = leafletOptions(zoomControl = TRUE, minZoom = 10, maxZoom = 18)
 ) |>
   addTiles(
-    urlTemplate = maptiler_tiles("dataviz-light"),
+    urlTemplate = basemap_tiles("positron"),
     attribution = attrib_maptiler,
-    group = "MapTiler · DataViz light"
+    group = "CartoDB Positron"
   ) |>
   addTiles(
-    urlTemplate = maptiler_tiles("streets-v2"),
+    urlTemplate = basemap_tiles("voyager"),
     attribution = attrib_maptiler,
-    group = "MapTiler · Streets"
+    group = "CartoDB Voyager"
   ) |>
   addPolygons(
     data = municipio, fill = FALSE, color = "black",
@@ -200,7 +200,7 @@ if (length(todos) > 0) {
 
 mapa <- mapa |>
   addLayersControl(
-    baseGroups    = c("MapTiler · DataViz light", "MapTiler · Streets"),
+    baseGroups    = c("CartoDB Positron", "CartoDB Voyager"),
     overlayGroups = overlay_groups,
     options = layersControlOptions(collapsed = FALSE)
   ) |>

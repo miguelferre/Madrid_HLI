@@ -73,7 +73,7 @@ barrios_geo   <- st_transform(barrios,   CRS_GEOGRAFICO)
 municipio_geo <- st_transform(municipio, CRS_GEOGRAFICO)
 
 # Atribución MapTiler
-attrib_maptiler <- '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+attrib_maptiler <- basemap_attribution()
 
 popup_barrio <- sprintf(
   "<div style='font-family:Inter,sans-serif'>
@@ -90,14 +90,14 @@ mapa_interactivo <- leaflet(
   options = leafletOptions(zoomControl = TRUE, minZoom = 10, maxZoom = 17)
 ) |>
   addTiles(
-    urlTemplate = maptiler_tiles("dataviz-light"),
+    urlTemplate = basemap_tiles("positron"),
     attribution = attrib_maptiler,
-    group = "MapTiler · DataViz light"
+    group = "CartoDB Positron"
   ) |>
   addTiles(
-    urlTemplate = maptiler_tiles("streets-v2"),
+    urlTemplate = basemap_tiles("voyager"),
     attribution = attrib_maptiler,
-    group = "MapTiler · Streets"
+    group = "CartoDB Voyager"
   ) |>
   addPolygons(
     data = barrios_geo,
@@ -127,7 +127,7 @@ mapa_interactivo <- leaflet(
     group = "Término municipal"
   ) |>
   addLayersControl(
-    baseGroups = c("MapTiler · DataViz light", "MapTiler · Streets"),
+    baseGroups = c("CartoDB Positron", "CartoDB Voyager"),
     overlayGroups = c("Barrios", "Distritos", "Término municipal"),
     options = layersControlOptions(collapsed = FALSE)
   ) |>

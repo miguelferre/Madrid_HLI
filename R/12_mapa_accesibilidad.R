@@ -132,7 +132,7 @@ popup_html <- function(d) {
 }
 popups <- vapply(seq_len(nrow(hli_geo)), \(i) popup_html(hli_geo[i, ]), character(1))
 
-attrib_maptiler <- '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+attrib_maptiler <- basemap_attribution()
 
 mk_acc_layer <- function(map, valor, group) {
   addPolygons(map,
@@ -151,9 +151,9 @@ mk_acc_layer <- function(map, valor, group) {
 
 mapa <- leaflet(options = leafletOptions(zoomControl = TRUE,
                                           minZoom = 10, maxZoom = 16)) |>
-  addTiles(urlTemplate = maptiler_tiles("dataviz-light"),
+  addTiles(urlTemplate = basemap_tiles("positron"),
             attribution = attrib_maptiler,
-            group = "MapTiler · DataViz light") |>
+            group = "CartoDB Positron") |>
   mk_acc_layer(hli_geo$acc_5min,  "Acceso 5 min")  |>
   mk_acc_layer(hli_geo$acc_10min, "Acceso 10 min") |>
   mk_acc_layer(hli_geo$acc_15min, "Acceso 15 min") |>
@@ -178,7 +178,7 @@ mapa <- leaflet(options = leafletOptions(zoomControl = TRUE,
   addLegend(position = "bottomright", pal = pal_acc, values = c(0, 100),
              title = "% nodos accesibles", opacity = 1, bins = 5) |>
   addLayersControl(
-    baseGroups = "MapTiler · DataViz light",
+    baseGroups = "CartoDB Positron",
     overlayGroups = c("Acceso 5 min", "Acceso 10 min", "Acceso 15 min",
                       "Parques ≥ 1 ha", "Nodos sin parque a 15 min", "Distritos"),
     options = layersControlOptions(collapsed = FALSE)

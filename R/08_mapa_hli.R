@@ -3,7 +3,7 @@
 #' Lámina (PNG): coroplético del HLI con etiquetas en top 5 / bottom 5
 #' y destacados narrativos (Sol como caso extremo de fast food).
 #'
-#' Mapa interactivo (HTML): MapTiler dataviz-light con tooltip que muestra
+#' Mapa interactivo (HTML): CartoDB Positron con tooltip que muestra
 #' los cuatro componentes y el ranking, capas alternativas para cada
 #' indicador y leyenda continua.
 #'
@@ -142,7 +142,7 @@ popup_html <- function(d) {
 popups <- vapply(seq_len(nrow(hli_geo)),
                   \(i) popup_html(hli_geo[i, ]), character(1))
 
-attrib_maptiler <- '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+attrib_maptiler <- basemap_attribution()
 
 # Capa por componente: paleta y dominio propio para cada uno
 mk_layer <- function(map, valor, group, paleta_opt, lim = NULL, fmt = "%.1f", unidad = "") {
@@ -166,12 +166,12 @@ mk_layer <- function(map, valor, group, paleta_opt, lim = NULL, fmt = "%.1f", un
 
 mapa <- leaflet(options = leafletOptions(zoomControl = TRUE,
                                           minZoom = 10, maxZoom = 16)) |>
-  addTiles(urlTemplate = maptiler_tiles("dataviz-light"),
+  addTiles(urlTemplate = basemap_tiles("positron"),
             attribution = attrib_maptiler,
-            group = "MapTiler · DataViz light") |>
-  addTiles(urlTemplate = maptiler_tiles("streets-v2"),
+            group = "CartoDB Positron") |>
+  addTiles(urlTemplate = basemap_tiles("voyager"),
             attribution = attrib_maptiler,
-            group = "MapTiler · Streets") |>
+            group = "CartoDB Voyager") |>
   addPolygons(
     data = hli_geo,
     fillColor = paleta_leaflet(hli_geo$HLI), fillOpacity = 0.85,
@@ -206,7 +206,7 @@ mapa <- leaflet(options = leafletOptions(zoomControl = TRUE,
     opacity = 1, bins = 5
   ) |>
   addLayersControl(
-    baseGroups = c("MapTiler · DataViz light", "MapTiler · Streets"),
+    baseGroups = c("CartoDB Positron", "CartoDB Voyager"),
     overlayGroups = c("HLI compuesto",
                       "Densidad comida saludable",
                       "Densidad deporte",

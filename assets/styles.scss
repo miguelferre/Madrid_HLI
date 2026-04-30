@@ -36,12 +36,28 @@ h1, h2, h3 {
   color: $primary;
 }
 
+// Números grandes inline (sin anchor link de heading)
+.stat-number {
+  display: block;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: $primary;
+  margin: 0.4rem 0 0.3rem;
+}
+
 .grid .g-col-4.text-center {
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: $border-radius-lg;
-  padding: 1.2rem 1rem;
+  padding: 1.4rem 1rem;
   box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.grid .g-col-4.text-center p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #4b5563;
+  line-height: 1.45;
 }
 
 // Callouts más limpios
