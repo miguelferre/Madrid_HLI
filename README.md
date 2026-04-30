@@ -152,7 +152,7 @@ quarto::quarto_render("index.qmd")
 
 ## Autor
 
-**Miguel Ferreiro García** — proyecto inicialmente desarrollado en un curso de SIG con R, refactorizado en 2026 como pieza de portfolio.
+**Miguel Ferreiro García** — proyecto inicialmente desarrollado en un curso de SIG con R, refactorizado en 2026.
 
 ## Licencia
 
