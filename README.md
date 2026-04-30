@@ -58,7 +58,11 @@ Madrid_HLI/
 │   ├── 14_regla_3_arboles.R       regla 3 — ≥3 árboles a 50 m
 │   ├── 15_regla_30_canopy.R       regla 30 — ≥30 % canopy en 250 m
 │   ├── 16_score_3_30_300.R        score combinado por barrio
-│   └── 17_mapa_3_30_300.R         cartografía + mapa interactivo
+│   ├── 17_mapa_3_30_300.R         cartografía + mapa interactivo
+│   └── 18_preparar_dashboard.R    GeoJSON simplificado para shinylive
+├── app/                  # dashboard Shiny (deployable como WebAssembly)
+│   ├── app.R                       UI + server (4 pestañas)
+│   └── data/                       barrios.geojson · distritos.geojson · municipio.geojson
 ├── data/
 │   ├── raw/               # descargas crudas (gitignored)
 │   └── processed/         # datasets procesados (.gpkg + .csv)
@@ -84,7 +88,7 @@ Madrid_HLI/
 | Visualización del eje HLI ↔ renta | ✅ |
 | Isocronas peatonales con `dodgr` | ✅ |
 | Regla 3-30-300 (arbolado + canopy + accesibilidad) | ✅ |
-| Dashboard `shinylive` en GitHub Pages | ⏳ pendiente |
+| Dashboard `shinylive` en GitHub Pages | ✅ |
 
 ## Salidas destacadas
 
@@ -97,6 +101,7 @@ Madrid_HLI/
 - `outputs/maps/05_accesibilidad_interactivo.html` — accesibilidad peatonal a parques ≥1 ha (5/10/15 min).
 - `outputs/maps/06_3_30_300_interactivo.html` — regla 3-30-300 barrio a barrio.
 - `outputs/figures/14_panel_3_30_300.png` — lámina con las 3 reglas + score combinado.
+- `docs/app/index.html` — **dashboard `shinylive`** (mapa + comparativa + equidad + tabla descargable).
 
 ## Cómo reproducirlo
 
@@ -131,7 +136,7 @@ quarto::quarto_render("index.qmd")
 5. **Renta:** Atlas de Distribución de Renta de los Hogares 2023 del INE — agregada de sección censal a barrio del Ayuntamiento por intersección espacial (centroide).
 6. **Accesibilidad peatonal con `dodgr`:** sobre la red de calles del extracto Geofabrik (152 K segmentos · 605 K vértices) se calcula la distancia mínima al parque ≥ 1 ha más cercano y se marcan los nodos accesibles a 5 / 10 / 15 min (perfil peatonal a 4,8 km/h ≈ 80 m/min).
 7. **Regla 3-30-300 (Konijnendijk):** evaluada por nodo del callejero. *Regla 3* — ≥ 3 árboles a 50 m, calculada con `terra::rasterize` + focal sum sobre los 793 K árboles del inventario municipal. *Regla 30* — ≥ 30 % de cubierta arbórea en buffer 250 m, derivada del raster ESA WorldCover 2021 v200 (10 m, clase Tree cover). *Regla 300* — parque ≥ 1 ha a ≤ 5 min andando, equivale a `acc_5min` del paso 6. El score combinado es el % de nodos del barrio que cumplen las tres a la vez.
-8. **Próximos pasos:** dashboard `shinylive`.
+8. **Dashboard interactivo (`shinylive`):** la app `app/app.R` se exporta como WebAssembly puro y queda servida desde GitHub Pages sin necesidad de servidor Shiny. Permite explorar las métricas barrio a barrio, comparar hasta seis barrios en un radar plotly y descargar el dataset completo en CSV/Excel.
 
 ## Fuentes de datos
 
