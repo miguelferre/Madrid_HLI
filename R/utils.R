@@ -55,6 +55,10 @@ configurar_pandoc <- function() {
   invisible(pandoc)
 }
 
+#' Pesos del HLI v1 — fuente única de verdad. Los consume R/07_agregacion_barrios.R.
+#' Si en el futuro se calibran (renta ponderada, AHP, etc.) se cambia aquí.
+PESOS_HLI <- c(comida = 0.25, deporte = 0.25, parques = 0.25, fastfood = 0.25)
+
 #' Normaliza un raster o vector numérico al rango [0, 1].
 normalizar_01 <- function(x, invertir = FALSE) {
   rng <- range(x, na.rm = TRUE)

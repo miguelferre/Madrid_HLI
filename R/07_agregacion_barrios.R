@@ -8,9 +8,10 @@
 #'
 #' Cada indicador se normaliza al rango [0, 1] usando rango robusto
 #' (percentiles 5–95) para que un outlier no aplane el resto. El fast
-#' food se invierte (1 - x). El HLI es la media simple de los 4
-#' componentes — los pesos son explícitos en R/utils.R::PESOS_HLI por
-#' si más adelante queremos calibrarlos.
+#' food se invierte (1 - x). El HLI es la media ponderada de los 4
+#' componentes; los pesos viven en `R/utils.R::PESOS_HLI` y por defecto
+#' son 0,25 cada uno. Allí se calibran si en el futuro se quieren
+#' afinar (AHP, renta ponderada, etc.).
 #'
 #' Salidas en data/processed/:
 #'   - hli_barrios.gpkg  (todos los indicadores + HLI + ranking)
@@ -22,9 +23,7 @@ suppressPackageStartupMessages({
   library(readr)
 })
 
-source("R/utils.R")
-
-PESOS_HLI <- c(comida = 0.25, deporte = 0.25, parques = 0.25, fast_food = 0.25)
+source("R/utils.R")  # PESOS_HLI vive aquí — fuente única de verdad
 
 # Carga ------------------------------------------------------------------------
 
@@ -97,7 +96,7 @@ barrios$HLI <- with(barrios,
   PESOS_HLI["comida"]    * z_comida   +
   PESOS_HLI["deporte"]   * z_deporte  +
   PESOS_HLI["parques"]   * z_parques  +
-  PESOS_HLI["fast_food"] * z_fastfood
+  PESOS_HLI["fastfood"]  * z_fastfood
 )
 
 barrios$ranking <- rank(-barrios$HLI, ties.method = "min")

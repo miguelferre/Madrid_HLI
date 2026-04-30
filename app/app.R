@@ -64,7 +64,7 @@ METRICAS <- list(
   pct_parques = list(
     label = "Cubierta de parques (%)",
     paleta = c("#f7fcb9","#addd8e","#41ab5d","#238443","#005a32"),
-    domain = c(0, 80), unidad = "%",
+    domain = c(0, 100), unidad = "%",
     desc = "Porcentaje del barrio cubierto por parques (OSM, recortados al barrio para no contar dos veces parques que cruzan límites)."
   )
 )

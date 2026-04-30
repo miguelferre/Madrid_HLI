@@ -62,7 +62,19 @@ agg <- nodos[, c("regla_3", "regla_30", "regla_300", "cumple_3_30_300")] |>
     .groups = "drop"
   )
 
-barrios <- barrios |> left_join(agg, by = "COD_DISBAR") |>
+barrios <- barrios |> left_join(agg, by = "COD_DISBAR")
+
+# Las columnas regla_3_pct y regla_30_pct deben existir antes de aquí
+# (las añaden R/14 y R/15 respectivamente). Si faltan, score_medio sale
+# con NA silenciosos: mejor cortar con un mensaje claro.
+stopifnot(
+  "Falta regla_3_pct: ejecuta R/14_regla_3_arboles.R antes que R/16."  =
+    "regla_3_pct"  %in% names(barrios),
+  "Falta regla_30_pct: ejecuta R/15_regla_30_canopy.R antes que R/16." =
+    "regla_30_pct" %in% names(barrios)
+)
+
+barrios <- barrios |>
   mutate(
     score_medio_3_30_300 = round(
       (regla_3_pct + regla_30_pct + regla_300_pct) / 3, 1
