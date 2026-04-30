@@ -23,49 +23,49 @@ METRICAS <- list(
     label = "HLI v1 (índice compuesto)",
     paleta = c("#440154","#3b528b","#21918c","#5ec962","#fde725"),
     domain = c(0, 1), unidad = "",
-    desc = "Media de 4 indicadores: comida saludable, deporte, parques (+) y fast food (−)."
+    desc = "Media de 4 indicadores normalizados al rango [0,1]: comida saludable, deporte, parques (con signo +) y fast food (con signo −). Valor más alto = barrio más saludable según oferta urbana."
   ),
   score_3_30_300 = list(
     label = "Score 3-30-300 (% nodos cumplen las tres)",
     paleta = c("#fde725","#5ec962","#21918c","#3b528b","#440154"),
     domain = c(0, 60), unidad = "%",
-    desc = "Porcentaje de nodos del callejero que cumplen las tres reglas a la vez."
+    desc = "Porcentaje de nodos del callejero que cumplen simultáneamente las tres reglas: ≥3 árboles a 50 m, ≥30 % canopy en 250 m y parque ≥1 ha a 5 min andando."
   ),
   regla_3_pct = list(
     label = "Regla 3 — ≥3 árboles a 50 m",
     paleta = c("#fff7bc","#fee391","#fec44f","#fe9929","#cc4c02"),
     domain = c(0, 100), unidad = "%",
-    desc = "% de nodos del callejero con tres o más árboles inventariados a ≤50 m."
+    desc = "% de nodos del callejero con tres o más árboles inventariados a ≤50 m. Inventario municipal del Ayto: 793 K árboles."
   ),
   regla_30_pct = list(
     label = "Regla 30 — ≥30 % canopy en 250 m",
     paleta = c("#f7fcb9","#addd8e","#41ab5d","#238443","#005a32"),
     domain = c(0, 100), unidad = "%",
-    desc = "% de nodos cuyo entorno (250 m) tiene 30 % o más de cubierta arbórea (ESA WorldCover)."
+    desc = "% de nodos cuyo entorno (250 m) tiene 30 % o más de cubierta arbórea continua según ESA WorldCover 2021 (10 m)."
   ),
   regla_300_pct = list(
     label = "Regla 300 — parque ≥1 ha a 5 min",
     paleta = c("#edf8fb","#b3cde3","#8c96c6","#8856a7","#810f7c"),
     domain = c(0, 100), unidad = "%",
-    desc = "% de nodos con un parque ≥1 ha a ≤400 m peatonales (isócronas con dodgr)."
+    desc = "% de nodos con un parque ≥1 ha a ≤400 m peatonales (≈5 min a 4,8 km/h). Calculado con isócronas reales sobre el callejero (dodgr)."
   ),
   renta_neta_persona = list(
     label = "Renta neta por persona (€/año)",
     paleta = c("#f7fbff","#c6dbef","#6baed6","#2171b5","#08306b"),
     domain = c(11000, 36000), unidad = " €",
-    desc = "Atlas de Distribución de Renta de los Hogares 2023 (INE), agregado a barrio."
+    desc = "Atlas de Distribución de Renta de los Hogares 2023 (INE), agregado de sección censal a barrio."
   ),
   dens_arboles_ha = list(
     label = "Densidad de árboles (n/ha)",
     paleta = c("#fff7bc","#fee391","#fec44f","#fe9929","#cc4c02"),
     domain = c(0, 100), unidad = "/ha",
-    desc = "Árboles del inventario municipal por hectárea de barrio."
+    desc = "Árboles del inventario municipal por hectárea de barrio. Útil para detectar deserts arbóreos versus zonas sobreplantadas."
   ),
   pct_parques = list(
     label = "Cubierta de parques (%)",
     paleta = c("#f7fcb9","#addd8e","#41ab5d","#238443","#005a32"),
     domain = c(0, 80), unidad = "%",
-    desc = "Porcentaje del barrio cubierto por parques OSM (recortados al barrio)."
+    desc = "Porcentaje del barrio cubierto por parques (OSM, recortados al barrio para no contar dos veces parques que cruzan límites)."
   )
 )
 
@@ -83,6 +83,19 @@ normaliza_01 <- function(x) {
 barrios_norm <- as.data.frame(st_drop_geometry(barrios))
 for (v in VAR_RADAR) barrios_norm[[paste0(v, "_n")]] <- normaliza_01(barrios_norm[[v]])
 
+# UI helpers ------------------------------------------------------------------
+
+info_box <- function(...) {
+  div(
+    style = paste(
+      "background:#eef9f4;border-left:4px solid #0f766e;",
+      "padding:10px 14px;border-radius:4px;",
+      "font-size:12px;line-height:1.55;color:#374151;margin-bottom:10px"
+    ),
+    ...
+  )
+}
+
 # UI --------------------------------------------------------------------------
 
 ui <- page_navbar(
@@ -90,12 +103,19 @@ ui <- page_navbar(
   theme = bs_theme(bootswatch = "minty"),
   fillable = TRUE,
 
+  # ----- Mapa -------------------------------------------------------------
   nav_panel(
     title = "Mapa",
     layout_sidebar(
       sidebar = sidebar(
-        width = 320,
-        h5("Métrica", style = "margin-top:0"),
+        width = 340,
+        info_box(
+          tags$strong("¿Qué muestra este mapa?"), tags$br(),
+          "Cada barrio (de los 131 de Madrid) coloreado por la métrica que",
+          "elijas. Pulsa un barrio para ver su ficha completa: HLI, las tres",
+          "reglas 3-30-300, renta, accesibilidad y densidad de árboles."
+        ),
+        h6("Métrica a representar"),
         selectInput("var", NULL,
                     choices = setNames(names(METRICAS),
                                           sapply(METRICAS, \(x) x$label)),
@@ -103,7 +123,8 @@ ui <- page_navbar(
         uiOutput("desc"),
         hr(),
         selectInput("distrito_filt", "Filtrar por distrito (opcional):",
-                    choices = c("Todos" = "ALL", sort(unique(barrios$NOMDIS))),
+                    choices = c("Todos los distritos" = "ALL",
+                                  sort(unique(barrios$NOMDIS))),
                     selected = "ALL"),
         hr(),
         h6("Top 5 barrios"),
@@ -115,49 +136,99 @@ ui <- page_navbar(
     )
   ),
 
+  # ----- Comparar ---------------------------------------------------------
   nav_panel(
     title = "Comparar",
-    layout_sidebar(
-      sidebar = sidebar(
-        width = 320,
-        h5("Selecciona barrios"),
-        selectizeInput("barrios_sel", NULL,
+    div(
+      style = "padding:14px 18px",
+      info_box(
+        tags$strong("¿Cómo se lee el radar?"), tags$br(),
+        "Cada eje es una métrica normalizada al rango ",
+        tags$strong("[p5, p95]"),
+        " del conjunto de barrios. ",
+        tags$strong("1 = top 5 % de Madrid"),
+        ", 0 = bottom 5 %. Un barrio con todos los ejes cerca de 1 es un barrio bien dotado en todas las dimensiones; ",
+        "un barrio con un perfil estrellado revela en qué dimensiones destaca y en cuáles flojea.",
+        tags$br(),
+        tags$strong("Cómo usar:"), " añade barrios con el desplegable, quítalos pulsando la ",
+        tags$strong("× "), "de cada chip o ",
+        tags$strong("Vaciar"), " para empezar de cero. Hasta 6 barrios a la vez."
+      ),
+      layout_columns(
+        col_widths = c(10, 2),
+        selectizeInput("barrios_sel",
+                       label = "Barrios a comparar",
                        choices = sort(barrios$NOMBRE),
                        multiple = TRUE,
-                       selected = c("Castellana", "Comillas", "Atalaya", "Sol"),
-                       options = list(maxItems = 6,
-                                       placeholder = "Hasta 6 barrios")),
-        helpText("Cada eje del radar está normalizado al rango",
-                  tags$strong("[p5, p95]"),
-                  "del conjunto de barrios. 1 = top 5 % de Madrid."),
-        hr(),
-        h6("Tabla comparativa"),
-        DTOutput("tabla_comp", height = "auto")
+                       selected = c("Castellana", "Comillas", "Atalaya"),
+                       options = list(
+                         maxItems = 6,
+                         placeholder = "Empieza a escribir un nombre…",
+                         plugins = list("remove_button", "clear_button")
+                       ),
+                       width = "100%"),
+        div(style = "padding-top:30px",
+            actionButton("clear_sel", "Vaciar",
+                         class = "btn-outline-secondary btn-sm",
+                         style = "width:100%"))
       ),
-      plotlyOutput("radar", height = "85vh")
-    )
-  ),
-
-  nav_panel(
-    title = "Equidad",
-    layout_columns(
-      col_widths = c(6, 6),
-      card(
-        card_header("HLI v1 ↔ renta neta por persona"),
-        plotlyOutput("scatter_hli", height = "75vh")
-      ),
-      card(
-        card_header("Score 3-30-300 ↔ renta neta por persona"),
-        plotlyOutput("scatter_330", height = "75vh")
+      layout_columns(
+        col_widths = c(7, 5),
+        card(
+          card_header("Perfil radar"),
+          plotlyOutput("radar", height = "560px")
+        ),
+        card(
+          card_header("Tabla comparativa"),
+          DTOutput("tabla_comp", height = "560px")
+        )
       )
     )
   ),
 
+  # ----- Equidad ----------------------------------------------------------
+  nav_panel(
+    title = "Equidad",
+    div(
+      style = "padding:14px 18px",
+      info_box(
+        tags$strong("¿Por qué dos scatter?"), tags$br(),
+        "Comparamos cómo se distribuye la oferta urbana saludable según la renta del barrio. ",
+        "El ", tags$strong("HLI v1"), " mide densidad bruta de POIs y % parques: tiene una ",
+        tags$strong("correlación negativa con renta (Pearson −0,26)"), " — ",
+        "los barrios obreros del sur están mejor dotados que los ricos del norte. ",
+        "El ", tags$strong("Score 3-30-300"), " mide cumplimiento simultáneo de tres reglas urbanísticas",
+        " (árboles, canopy, accesibilidad a parque): la correlación con renta cae a casi cero (",
+        tags$strong("−0,04"), ") porque cada componente capta una dimensión distinta y se compensan. ",
+        "Pasa el ratón sobre cada punto para ver el barrio."
+      ),
+      layout_columns(
+        col_widths = c(6, 6),
+        card(
+          card_header("HLI v1 ↔ renta neta por persona"),
+          plotlyOutput("scatter_hli", height = "70vh")
+        ),
+        card(
+          card_header("Score 3-30-300 ↔ renta neta por persona"),
+          plotlyOutput("scatter_330", height = "70vh")
+        )
+      )
+    )
+  ),
+
+  # ----- Datos ------------------------------------------------------------
   nav_panel(
     title = "Datos",
-    card(
-      card_header("Tabla completa por barrio · busca, ordena, exporta"),
-      DTOutput("tabla_full", height = "85vh")
+    div(
+      style = "padding:14px 18px",
+      info_box(
+        tags$strong("Tabla completa por barrio."), " Busca por nombre, ordena ",
+        "haciendo clic en la cabecera, exporta a CSV/Excel con los botones de arriba. ",
+        "Los 131 barrios de Madrid con sus 14 indicadores principales."
+      ),
+      card(
+        DTOutput("tabla_full", height = "78vh")
+      )
     )
   ),
 
@@ -177,12 +248,11 @@ server <- function(input, output, session) {
 
   output$desc <- renderUI({
     m <- METRICAS[[input$var]]
-    div(style = "color:#4b5563;font-size:12px;line-height:1.5",
+    div(style = "color:#4b5563;font-size:12px;line-height:1.5;margin-top:6px",
         tags$em(m$desc))
   })
 
   output$top5 <- renderTable({
-    m <- METRICAS[[input$var]]
     df <- st_drop_geometry(filt())
     df |> arrange(desc(.data[[input$var]])) |> head(5) |>
       transmute(Barrio = NOMBRE,
@@ -204,7 +274,7 @@ server <- function(input, output, session) {
     pal <- colorNumeric(m$paleta, domain = m$domain, na.color = "#cccccc")
 
     popups <- sprintf(
-      "<div style='font-family:Inter;min-width:240px'>
+      "<div style='font-family:sans-serif;min-width:240px'>
          <strong style='font-size:14px'>%s</strong><br>
          <span style='color:#6b7280;font-size:11px'>%s</span>
          <table style='font-size:11px;margin-top:6px;width:100%%'>
@@ -249,9 +319,28 @@ server <- function(input, output, session) {
 
   # --- Comparar ------------------------------------------------------------
 
+  observeEvent(input$clear_sel, {
+    updateSelectizeInput(session, "barrios_sel", selected = character(0))
+  })
+
   output$radar <- renderPlotly({
     sel <- input$barrios_sel
-    if (length(sel) == 0) return(plotly_empty(type = "scatterpolar"))
+    if (length(sel) == 0) {
+      return(
+        plot_ly(type = "scatterpolar", mode = "lines") |>
+          layout(
+            polar = list(radialaxis = list(range = c(0, 1)),
+                          bgcolor = "#fafaf7"),
+            paper_bgcolor = "#fafaf7",
+            annotations = list(
+              list(x = 0.5, y = 0.5, xref = "paper", yref = "paper",
+                   text = "Selecciona uno o más barrios para ver su perfil",
+                   showarrow = FALSE,
+                   font = list(size = 14, color = "#6b7280"))
+            )
+          )
+      )
+    }
     df <- barrios_norm |> filter(NOMBRE %in% sel)
 
     fig <- plot_ly(type = "scatterpolar", mode = "lines+markers", fill = "toself")
@@ -273,14 +362,20 @@ server <- function(input, output, session) {
                                        gridcolor = "#e5e7eb"),
                     bgcolor = "#fafaf7"),
       showlegend = TRUE,
+      legend = list(orientation = "h", x = 0, y = -0.05),
       paper_bgcolor = "#fafaf7",
-      margin = list(t = 30, b = 30)
+      margin = list(t = 30, b = 60)
     )
   })
 
   output$tabla_comp <- renderDT({
     sel <- input$barrios_sel
-    if (length(sel) == 0) return(NULL)
+    if (length(sel) == 0) {
+      return(datatable(
+        data.frame(`(vacío)` = "Selecciona barrios arriba", check.names = FALSE),
+        options = list(dom = "t", paging = FALSE), rownames = FALSE
+      ))
+    }
     df <- st_drop_geometry(barrios) |>
       filter(NOMBRE %in% sel) |>
       transmute(Barrio = NOMBRE,
@@ -288,10 +383,14 @@ server <- function(input, output, session) {
                 `R3 %` = regla_3_pct,
                 `R30 %` = regla_30_pct,
                 `R300 %` = regla_300_pct,
-                `Score` = score_3_30_300,
-                `Renta` = renta_neta_persona)
-    datatable(df, options = list(dom = "t", paging = FALSE),
-              rownames = FALSE)
+                `Score 3-30-300 %` = score_3_30_300,
+                `Renta €` = renta_neta_persona,
+                `Árb./ha` = round(dens_arboles_ha, 1))
+    datatable(df,
+              options = list(dom = "t", paging = FALSE,
+                              scrollX = TRUE, scrollY = "440px"),
+              rownames = FALSE) |>
+      formatStyle("HLI", fontWeight = "bold")
   })
 
   # --- Equidad -------------------------------------------------------------
@@ -317,7 +416,8 @@ server <- function(input, output, session) {
                 list(x = 0.98, y = 0.98, xref = "paper", yref = "paper",
                      text = sprintf("Pearson = %.3f",
                                      cor(df$HLI, df$renta_neta_persona)),
-                     showarrow = FALSE, font = list(size = 14, color = "#dc2626"))),
+                     showarrow = FALSE, font = list(size = 14, color = "#dc2626"),
+                     align = "right")),
               paper_bgcolor = "#fafaf7", plot_bgcolor = "#fafaf7")
   })
 
@@ -342,7 +442,8 @@ server <- function(input, output, session) {
                 list(x = 0.98, y = 0.98, xref = "paper", yref = "paper",
                      text = sprintf("Pearson = %.3f",
                                      cor(df$score_3_30_300, df$renta_neta_persona)),
-                     showarrow = FALSE, font = list(size = 14, color = "#dc2626"))),
+                     showarrow = FALSE, font = list(size = 14, color = "#dc2626"),
+                     align = "right")),
               paper_bgcolor = "#fafaf7", plot_bgcolor = "#fafaf7")
   })
 

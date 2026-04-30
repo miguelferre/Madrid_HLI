@@ -1,6 +1,6 @@
 ---
 title: "Madrid · Healthy Living Index"
-subtitle: "Análisis espacial de la habitabilidad saludable y la regla 3-30-300"
+subtitle: "Dónde es fácil vivir saludable en Madrid, y para quién"
 author: "Miguel Ferreiro García"
 date: today
 date-format: "MMMM YYYY"
@@ -8,210 +8,177 @@ lang: es
 format:
   html:
     theme:
-      - cosmo
-      - assets/styles.scss
+      - flatly
     toc: true
-    toc-location: left
-    toc-depth: 3
-    toc-title: "Contenido"
+    toc-location: right
+    toc-depth: 2
+    toc-title: "En esta página"
     code-fold: true
-    code-tools: true
-    code-summary: "Mostrar código"
-    fig-width: 10
-    fig-height: 7
+    code-tools: false
     fig-align: center
     embed-resources: false
     smooth-scroll: true
     page-layout: full
     grid:
-      sidebar-width: 280px
-      body-width: 1100px
-      margin-width: 220px
+      sidebar-width: 0px
+      body-width: 1200px
+      margin-width: 250px
+    css: assets/landing.css
 execute:
   freeze: auto
   warning: false
   message: false
-  echo: true
-knitr:
-  opts_chunk:
-    dev: png
-    dpi: 144
+  echo: false
 ---
 
-```{r setup}
-#| include: false
+::: {.hero}
+::: {.hero-inner}
+# Madrid · Healthy Living Index
 
-# Cargar utilidades del proyecto
-source("R/utils.R")
+**¿Es Madrid una ciudad fácil para llevar una vida saludable?
+¿Y lo es igual de fácil en todos sus barrios?**
 
-# Paquetes principales (se cargarán bajo demanda en cada sección)
-suppressPackageStartupMessages({
-  library(sf)
-  library(dplyr)
-  library(ggplot2)
-})
-```
+Este proyecto cruza datos abiertos de OpenStreetMap, INE, Ayuntamiento de Madrid y satélites Sentinel para construir un **índice compuesto por barrio** y evaluar la **regla 3-30-300** de urbanismo verde de Cecil Konijnendijk. La respuesta corta: la oferta urbana saludable correlaciona **negativamente** con la renta. La regla 3-30-300, en cambio, borra esa correlación. Cada componente capta una dimensión distinta.
 
-::: {.callout-note appearance="simple"}
-**Estado del documento:** en construcción. Esta versión es el esqueleto inicial; las secciones se irán completando de forma incremental con datos reales.
+[Ir al dashboard interactivo ↓](#dashboard){.btn .btn-primary .btn-lg}
+[Ver código en GitHub](https://github.com/miguelferre/Madrid_HLI){.btn .btn-outline-secondary .btn-lg target="_blank"}
+
+:::
 :::
 
-# Resumen ejecutivo {.unnumbered}
+## Cifras clave {.unnumbered}
 
-¿Es Madrid una ciudad fácil para llevar una vida saludable? ¿Y lo es **igual de fácil** en todos sus barrios?
-
-Este documento responde a esas preguntas combinando datos abiertos (OpenStreetMap, INE, Ayuntamiento de Madrid, satélite Sentinel/Meta) con análisis espacial en R. El resultado es un **Índice de Vida Saludable (IVS)** por barrio y una evaluación del cumplimiento de la **regla 3-30-300** de urbanismo verde.
-
-::: {.grid}
+::: {.grid .key-numbers}
 ::: {.g-col-4 .text-center}
 ### **131**
 barrios analizados
 :::
 ::: {.g-col-4 .text-center}
-### **5**
-capas de entrada
+### **−0,26**
+correlación HLI ↔ renta neta (Pearson)
 :::
 ::: {.g-col-4 .text-center}
-### **3-30-300**
-estándar de referencia
+### **9 %**
+mediana de barrios que cumplen las **tres** reglas 3-30-300
 :::
 :::
 
-# 1 · Marco metodológico
+## Hallazgo principal {#hallazgo}
 
-## 1.1 Pregunta de investigación
+El **HLI v1** (índice compuesto a partir de densidad de comida saludable, deporte, parques y fast food) **correlaciona negativamente con la renta**: los barrios obreros del **sur** (Carabanchel, Usera, Puente de Vallecas) están mejor dotados que los barrios ricos del **norte** (Salamanca, Chamartín, Moncloa). El dinero no compra equidad en oferta de mercados, polideportivos ni parques.
 
-Cuantificar, a nivel de barrio, la facilidad para llevar un estilo de vida saludable en el municipio de Madrid, integrando:
-
-- **Acceso a alimentación saludable** (fruterías, mercados, tiendas especializadas).
-- **Acceso a actividad física** (gimnasios, instalaciones deportivas).
-- **Cercanía a espacios verdes** (parques mayores de 15 ha).
-- **Penetración de comida rápida** como factor inverso.
-- **Cubierta arbórea** y proximidad a verde urbano (regla 3-30-300).
-- **Equidad**: ¿se distribuye el índice de forma justa respecto a la renta?
-
-## 1.2 Pipeline de análisis
-
-```{mermaid}
-%%| label: fig-pipeline
-%%| fig-cap: "Pipeline de análisis"
-
-flowchart LR
-  A[OSM<br/>Overpass] --> B[Limpieza<br/>+ filtrado]
-  C[Ayto Madrid<br/>distritos, barrios, arbolado] --> B
-  D[INE<br/>renta + sec. censales] --> B
-  E[Meta Canopy<br/>Height 1m] --> B
-  B --> F[KDE proyectado<br/>EPSG:25830]
-  B --> G[Isocronas<br/>peatonales dodgr]
-  F --> H[Índice IVS<br/>por barrio]
-  G --> H
-  H --> I[Cruce con renta<br/>+ regla 3-30-300]
-  I --> J[Mapas + dashboard]
-```
-
-# 2 · Datos {#sec-datos}
-
-## 2.1 Marco administrativo
-
-El análisis se hace sobre el **término municipal de Madrid** (604 km²), desagregado en sus **21 distritos** y **131 barrios** oficiales.
-
-```{r mapa-base}
-#| label: fig-mapa-base
-#| fig-cap: "Madrid municipio: 21 distritos y 131 barrios. Fuente: Ayuntamiento de Madrid · Geoportal IDEAM (CC BY 4.0)."
-#| fig-width: 9
-#| fig-height: 9
-#| echo: false
-
-knitr::include_graphics("outputs/figures/01_distritos_barrios.png")
-```
-
-Los datos administrativos se descargan automáticamente del [Geoportal IDEAM](https://geoportal.madrid.es/) y se almacenan localmente en `data/processed/` como GeoPackage en CRS **EPSG:25830** (ETRS89 / UTM 30N), el sistema oficial para España peninsular.
-
-::: {.callout-tip collapse="true"}
-## Reproducibilidad: ¿cómo se obtienen estos datos?
-
-```r
-source("R/01_descargar_datos.R")  # descarga + limpieza
-source("R/02_mapa_base.R")        # mapa estático + interactivo
-```
-
-El script descarga los shapefiles desde el geoportal, los reproyecta a EPSG:25830, valida la geometría y deriva el polígono del término municipal por unión de los 21 distritos.
+::: {.figure-caption}
+![](figures/05_hli_vs_renta.png){fig-alt="Scatter HLI vs renta con regresión negativa"}
+*HLI (eje Y) frente a renta neta por persona (eje X) para los 131 barrios. Cada punto es un barrio. La línea de regresión va hacia abajo: a más renta, peor HLI medio.*
 :::
 
-## 2.2 Capas temáticas (OpenStreetMap)
+| | alto HLI | bajo HLI |
+|---|---|---|
+| **renta alta** | 30 barrios | 36 barrios — *trampas* |
+| **renta baja** | 36 barrios — *gangas* | 29 barrios |
 
-| Capa | Tags OSM utilizados | Total POIs |
-|---|---|---:|
-| Comida saludable | `shop=greengrocer`, `shop=health_food`, `shop=herbalist`, `shop=deli`, `shop=nutrition_supplements`, `shop=farm`, `amenity=marketplace` | **1.835** |
-| Actividad física | `leisure=fitness_centre`, `leisure=fitness_station`, `leisure=sports_centre` | **5.971** |
-| Comida rápida | `amenity=fast_food` | **1.454** |
-| Espacios verdes | `leisure=park`, `landuse=forest` (≥ 1.000 m²) | **1.934** |
+- *Top "gangas":* Comillas, Abrantes, Pradolongo, Zofío, San Isidro
+- *Top "trampas":* Valdemarín, Recoletos, Fuentelarreina, El Viso, Castellana
+- *Caso extremo:* Sol — HLI 0,12, 123 fast food/km², 0 % cubierta verde
+
+## La regla 3-30-300 {#tres-treinta-trescientos}
+
+Cecil Konijnendijk (2021) propone un estándar simple para urbanismo verde:
+
+::: {.grid .rule-cards}
+::: {.g-col-4}
+### 3
+**árboles visibles** desde la ventana
+:::
+::: {.g-col-4}
+### 30 %
+**cubierta arbórea** en el entorno (250 m)
+:::
+::: {.g-col-4}
+### 300 m
+al **parque ≥ 1 ha** más cercano
+:::
+:::
+
+Hemos evaluado las tres reglas sobre **605 K nodos del callejero** de Madrid: rasterización del inventario municipal de árboles (793 K) para la regla 3, ESA WorldCover 2021 a 10 m para la regla 30, e isócronas peatonales reales con `dodgr` para la regla 300.
+
+::: {.figure-caption}
+![](figures/14_panel_3_30_300.png){fig-alt="Cuatro mapas: regla 3, regla 30, regla 300 y score combinado"}
+*Las tres reglas y el score combinado por barrio. Madrid suspende: solo el 9 % mediano de los barrios cumple las tres a la vez.*
+:::
+
+**Lo interesante:** el **score combinado borra la correlación con renta** (Pearson −0,04 vs −0,26 del HLI v1). Cada componente capta una dimensión distinta y se compensan: la regla 3 (alineación viario) favorece a los barrios densos del centro; la regla 30 (canopy continuo) favorece zonas periféricas con grandes parques; la regla 300 (acceso a parque) reproduce el patrón sur-rico-mejor del HLI.
+
+::: {.callout-tip}
+**Tensión Salamanca.** Castellana, Goya y Lista alcanzan el **100 %** en regla 3 (alineaciones viarias densas) pero **0 %** en regla 30: los árboles individuales de viario no llegan al 30 % de cubierta continua según ESA WorldCover. El estándar 3-30-300 está pensado precisamente para detectar esta diferencia entre "hay árboles" y "hay barrio verde".
+:::
+
+## Dashboard interactivo {#dashboard}
+
+Explora los 131 barrios y sus 14 indicadores. Hasta 6 barrios comparados a la vez en radar, tabla descargable, scatter de equidad.
 
 ::: {.callout-note}
-**Decisión metodológica.** Los tags de la capa "comida saludable" se eligen tras verificar contra Taginfo y la API Overpass que `shop=organic` (0 elementos) y `marketplace=farmers_market` (0 elementos) no se utilizan en Madrid, mientras que `shop=supermarket` es demasiado laxo (incluye Mercadona, Lidl, etc.). Se priorizan tiendas especializadas y mercados.
+La primera carga del dashboard tarda **30–60 s**: el navegador descarga R + paquetes WASM (`shinylive`). En recargas posteriores arranca al instante.
 :::
 
-# 3 · Densidades y distancias {#sec-densidades}
-
-## 3.1 KDE proyectado
-
-La estimación de densidad por kernel se calcula sobre el sistema **EPSG:25830** (metros) — corrigiendo el error metodológico de la versión original, que ejecutaba el KDE en grados geográficos. El bandwidth se calcula automáticamente con la regla de Scott vía `spatstat::bw.scott()`.
-
-```{r kde-panel}
-#| label: fig-kde
-#| fig-cap: "Densidad de equipamientos por km² (KDE 100 m, recortado al municipio)."
-#| fig-width: 16
-#| fig-height: 7
-#| echo: false
-
-knitr::include_graphics("outputs/figures/02_kde_panel.png")
-```
-
-Las tres capas tienen estructuras espaciales diferentes:
-
-- **Comida saludable** muestra un núcleo intenso en Centro (mercados históricos) y picos secundarios en distritos residenciales acomodados (Salamanca, Chamberí).
-- **Actividad física** está distribuida de forma más homogénea por toda la ciudad, con concentraciones en distritos centrales y ensanches.
-- **Comida rápida** se concentra en el Centro (turismo) y en arterias comerciales periféricas.
-
-> _Análisis a nivel barrio + isocronas peatonales — siguiente iteración._
-
-# 4 · Índice de Vida Saludable {#sec-ivs}
-
-> _Sección a completar._
-
-# 5 · La regla 3-30-300 {#sec-regla}
-
-La regla **3-30-300** propuesta por Cecil Konijnendijk (2021) es un estándar simple y accionable de urbanismo verde:
-
-::: {.grid}
-::: {.g-col-4 .text-center}
-## 3
-**árboles visibles** desde cada vivienda
+::: {.dashboard-frame}
+<iframe src="app/" width="100%" height="850" frameborder="0" loading="lazy" title="Madrid HLI dashboard"></iframe>
 :::
-::: {.g-col-4 .text-center}
-## 30 %
-**cubierta arbórea** por barrio
+
+[Abrir el dashboard en pantalla completa](app/){.btn .btn-outline-primary target="_blank"}
+
+## Galería de mapas estáticos {#galeria}
+
+Para inspección rápida sin esperar a que arranque el dashboard:
+
+::: {.grid .map-gallery}
+::: {.g-col-6 .map-card}
+**[Ranking HLI por barrio](maps/03_hli_interactivo.html)**
+Coroplético del HLI v1. Pulsa cada barrio para ver desglose de los 4 componentes.
 :::
-::: {.g-col-4 .text-center}
-## 300 m
-al **espacio verde** más cercano
+::: {.g-col-6 .map-card}
+**[HLI ↔ renta + residual](maps/04_equidad_interactivo.html)**
+Tres capas: HLI, renta neta y residual del modelo HLI ~ renta.
+:::
+::: {.g-col-6 .map-card}
+**[Accesibilidad peatonal](maps/05_accesibilidad_interactivo.html)**
+% de nodos con parque ≥ 1 ha a 5/10/15 minutos andando (isócronas dodgr).
+:::
+::: {.g-col-6 .map-card}
+**[Regla 3-30-300](maps/06_3_30_300_interactivo.html)**
+Cuatro capas: regla 3, regla 30, regla 300 y score combinado.
 :::
 :::
 
-> _Análisis a completar._
+## Metodología compacta {#metodologia}
 
-# 6 · Equidad y conclusiones {#sec-equidad}
+1. **Capas OSM** (Overpass + Geofabrik): comida saludable, gimnasios, fast food, parques. Whitelist explícita por tag tras validación visual; rescate manual de Casa de Campo (1.373 ha).
+2. **KDE proyectado** (EPSG:25830) con bandwidth de Scott — densidades en metros, no en grados.
+3. **Agregación a 131 barrios:** densidad de POIs / km² + % cubierta de parques.
+4. **HLI compuesto:** media de 4 indicadores normalizados al rango [0,1] con cuantiles 5–95 (robusto a outliers como Sol con 123 fast food/km²); fast food invertido.
+5. **Renta:** ADRH 2023 del INE — agregada de sección censal a barrio por intersección espacial.
+6. **Accesibilidad** con `dodgr`: red peatonal real (152 K segmentos · 605 K vértices), distancia al parque ≥1 ha más cercano, isócronas a 5 / 10 / 15 min (4,8 km/h).
+7. **Regla 3-30-300:** evaluada por nodo. *Regla 3* — `terra::rasterize` de los 793 K árboles + focal sum en buffer 50 m. *Regla 30* — ESA WorldCover 2021 v200 (10 m, clase Tree cover) + focal sum en 250 m. *Regla 300* — equivale a `acc_5min`. Score = % nodos del barrio que cumplen las tres a la vez.
+8. **Dashboard** en `shinylive` (Shiny ejecutándose en el navegador como WebAssembly puro). Sin servidor.
 
-> _Sección a completar._
+## Fuentes de datos {#fuentes}
 
-# Apéndice · Reproducibilidad {.appendix}
+| Capa | Fuente | Licencia |
+|---|---|---|
+| POIs (gimnasios, comida, fast food, parques) | OpenStreetMap (Overpass + Geofabrik) | ODbL |
+| Distritos y barrios | Ayuntamiento de Madrid · Geoportal IDEAM | CC BY 4.0 |
+| Renta por sección censal | INE — ADRH 2023 (tabla 30824) | Reutilización libre |
+| Cartografía secciones censales | INE — Cartografía Digitalizada 2024 | Reutilización libre |
+| Arbolado urbano (793 K árboles) | datos.madrid.es · dataset 300761 | CC BY 4.0 |
+| Cubierta arbórea | ESA WorldCover 2021 v200 (10 m) | CC BY 4.0 |
+| Basemaps | MapTiler · CartoDB | API key / gratuito |
 
-```{r session-info}
-#| code-fold: true
-#| code-summary: "Información de la sesión R"
-sessionInfo()
-```
+## Sobre el proyecto
 
-::: {.callout-tip appearance="simple"}
-**Código fuente:** [github.com/MiguelFerreiro/Madrid_HLI](https://github.com/MiguelFerreiro/Madrid_HLI) (próximamente)
+Proyecto inicialmente desarrollado en un curso de SIG con R, refactorizado como pieza de portfolio. **18 scripts R numerados** generan toda la cadena reproducible desde descarga de datos crudos hasta los mapas, la app y este documento. El pipeline se restaura con `renv::restore()` y se ejecuta con un bucle sobre `R/*.R`.
+
+[Repositorio en GitHub](https://github.com/miguelferre/Madrid_HLI){.btn .btn-primary target="_blank"}
+
+::: {.footer-note}
+*Análisis y documento por Miguel Ferreiro García · datos abiertos del Ayuntamiento de Madrid, INE, OSM y ESA · `r format(Sys.Date(), '%B de %Y')`.*
 :::

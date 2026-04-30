@@ -1,0 +1,182 @@
+/* Madrid HLI · landing styles */
+
+/* Hero -------------------------------------------------------------------- */
+.hero {
+  background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%);
+  color: #f0fdfa;
+  margin: -1rem -2rem 2.5rem -2rem;
+  padding: 4rem 2rem 3rem 2rem;
+  text-align: center;
+  border-radius: 0 0 16px 16px;
+}
+.hero-inner {
+  max-width: 880px;
+  margin: 0 auto;
+}
+.hero h1 {
+  color: white;
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  border: none;
+}
+.hero p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #ccfbf1;
+  margin-bottom: 1.8rem;
+}
+.hero .btn {
+  margin: 0.4rem 0.4rem 0 0;
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+}
+.hero .btn-primary {
+  background: #fbbf24;
+  border-color: #fbbf24;
+  color: #134e4a;
+}
+.hero .btn-primary:hover {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  color: #134e4a;
+}
+.hero .btn-outline-secondary {
+  border-color: #ccfbf1;
+  color: #ccfbf1;
+}
+.hero .btn-outline-secondary:hover {
+  background: #ccfbf1;
+  color: #134e4a;
+}
+
+/* Cifras clave ----------------------------------------------------------- */
+.key-numbers {
+  margin: 2.5rem 0 3rem 0;
+  padding: 1.5rem 1rem;
+  background: #f0fdfa;
+  border-radius: 12px;
+  border-left: 4px solid #0f766e;
+}
+.key-numbers h3 {
+  color: #0f766e;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+  border: none;
+}
+.key-numbers p, .key-numbers > div > p {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* 3-30-300 cards --------------------------------------------------------- */
+.rule-cards {
+  margin: 1.5rem 0 2rem 0;
+}
+.rule-cards > div {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border: 2px solid #d1fae5;
+  border-radius: 10px;
+  background: #f0fdfa;
+}
+.rule-cards h3 {
+  color: #0f766e;
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0;
+  border: none;
+}
+
+/* Figuras con caption ---------------------------------------------------- */
+.figure-caption {
+  margin: 1.5rem 0 2rem 0;
+  text-align: center;
+}
+.figure-caption img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 0.75rem;
+}
+.figure-caption em {
+  display: block;
+  font-size: 0.85rem;
+  color: #6b7280;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Dashboard frame -------------------------------------------------------- */
+.dashboard-frame {
+  margin: 1.5rem 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  background: #fafaf7;
+}
+.dashboard-frame iframe {
+  display: block;
+  width: 100%;
+}
+
+/* Galería de mapas ------------------------------------------------------- */
+.map-gallery {
+  margin: 1rem 0 2rem 0;
+}
+.map-card {
+  padding: 1.2rem 1.4rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.map-card:hover {
+  box-shadow: 0 4px 12px rgba(15, 118, 110, 0.15);
+  transform: translateY(-2px);
+}
+.map-card a {
+  color: #0f766e;
+  font-weight: 600;
+  text-decoration: none;
+}
+.map-card a:hover {
+  text-decoration: underline;
+}
+
+/* Footer note ------------------------------------------------------------ */
+.footer-note {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+/* Responsive ------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero {
+    padding: 2.5rem 1rem 2rem 1rem;
+  }
+  .hero h1 {
+    font-size: 1.9rem;
+  }
+  .key-numbers h3 {
+    font-size: 1.8rem;
+  }
+  .rule-cards h3 {
+    font-size: 2.2rem;
+  }
+  .dashboard-frame iframe {
+    height: 700px !important;
+  }
+}

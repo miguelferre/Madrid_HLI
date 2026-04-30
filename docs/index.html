@@ -24,41 +24,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -69,61 +34,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="index_files/libs/quarto-html/anchor.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-93bdecd2dc2603caa7018afb3525f449.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap-952e7836cca52e02cca0e80cf66f0104.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="index_files/libs/bootstrap/bootstrap-63e8dee69e5ebb964d1fd5e2441e13f0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="index_files/libs/quarto-diagram/mermaid.min.js"></script>
-<script src="index_files/libs/quarto-diagram/mermaid-init.js"></script>
-<link href="index_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
+<link rel="stylesheet" href="assets/landing.css">
 </head>
 
 <body class="quarto-light">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-full toc-left">
-<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contenido</h2>
+    <h2 id="toc-title">En esta página</h2>
    
-  <ul>
-  <li><a href="#resumen-ejecutivo" id="toc-resumen-ejecutivo" class="nav-link active" data-scroll-target="#resumen-ejecutivo">Resumen ejecutivo</a></li>
-  <li><a href="#marco-metodológico" id="toc-marco-metodológico" class="nav-link" data-scroll-target="#marco-metodológico">1 · Marco metodológico</a>
   <ul class="collapse">
-  <li><a href="#pregunta-de-investigación" id="toc-pregunta-de-investigación" class="nav-link" data-scroll-target="#pregunta-de-investigación">1.1 Pregunta de investigación</a></li>
-  <li><a href="#pipeline-de-análisis" id="toc-pipeline-de-análisis" class="nav-link" data-scroll-target="#pipeline-de-análisis">1.2 Pipeline de análisis</a></li>
-  </ul></li>
-  <li><a href="#sec-datos" id="toc-sec-datos" class="nav-link" data-scroll-target="#sec-datos">2 · Datos</a>
-  <ul class="collapse">
-  <li><a href="#marco-administrativo" id="toc-marco-administrativo" class="nav-link" data-scroll-target="#marco-administrativo">2.1 Marco administrativo</a></li>
-  <li><a href="#capas-temáticas-openstreetmap" id="toc-capas-temáticas-openstreetmap" class="nav-link" data-scroll-target="#capas-temáticas-openstreetmap">2.2 Capas temáticas (OpenStreetMap)</a></li>
-  </ul></li>
-  <li><a href="#sec-densidades" id="toc-sec-densidades" class="nav-link" data-scroll-target="#sec-densidades">3 · Densidades y distancias</a>
-  <ul class="collapse">
-  <li><a href="#kde-proyectado" id="toc-kde-proyectado" class="nav-link" data-scroll-target="#kde-proyectado">3.1 KDE proyectado</a></li>
-  </ul></li>
-  <li><a href="#sec-ivs" id="toc-sec-ivs" class="nav-link" data-scroll-target="#sec-ivs">4 · Índice de Vida Saludable</a></li>
-  <li><a href="#sec-regla" id="toc-sec-regla" class="nav-link" data-scroll-target="#sec-regla">5 · La regla 3-30-300</a></li>
-  <li><a href="#sec-equidad" id="toc-sec-equidad" class="nav-link" data-scroll-target="#sec-equidad">6 · Equidad y conclusiones</a></li>
-  
+  <li><a href="#madrid-healthy-living-index" id="toc-madrid-healthy-living-index" class="nav-link active" data-scroll-target="#madrid-healthy-living-index">Madrid · Healthy Living Index</a></li>
+  <li><a href="#cifras-clave" id="toc-cifras-clave" class="nav-link" data-scroll-target="#cifras-clave">Cifras clave</a></li>
+  <li><a href="#hallazgo" id="toc-hallazgo" class="nav-link" data-scroll-target="#hallazgo">Hallazgo principal</a></li>
+  <li><a href="#tres-treinta-trescientos" id="toc-tres-treinta-trescientos" class="nav-link" data-scroll-target="#tres-treinta-trescientos">La regla 3-30-300</a></li>
+  <li><a href="#dashboard" id="toc-dashboard" class="nav-link" data-scroll-target="#dashboard">Dashboard interactivo</a></li>
+  <li><a href="#galeria" id="toc-galeria" class="nav-link" data-scroll-target="#galeria">Galería de mapas estáticos</a></li>
+  <li><a href="#metodologia" id="toc-metodologia" class="nav-link" data-scroll-target="#metodologia">Metodología compacta</a></li>
+  <li><a href="#fuentes" id="toc-fuentes" class="nav-link" data-scroll-target="#fuentes">Fuentes de datos</a></li>
+  <li><a href="#sobre-el-proyecto" id="toc-sobre-el-proyecto" class="nav-link" data-scroll-target="#sobre-el-proyecto">Sobre el proyecto</a></li>
   </ul>
 </nav>
 </div>
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-</div>
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Madrid · Healthy Living Index</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Código</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Mostrar todo el código</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Ocultar todo el código</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">Ver el código fuente</a></li></ul></div></div>
-<p class="subtitle lead">Análisis espacial de la habitabilidad saludable y la regla 3-30-300</p>
+<h1 class="title">Madrid · Healthy Living Index</h1>
+<p class="subtitle lead">Dónde es fácil vivir saludable en Madrid, y para quién</p>
 </div>
 
 
 
-<div class="quarto-title-meta column-page-right">
+<div class="quarto-title-meta column-page-left">
 
     <div>
     <div class="quarto-title-meta-heading">Autor/a</div>
@@ -147,171 +98,103 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="hero">
+<section id="madrid-healthy-living-index" class="level1 hero-inner">
+<h1>Madrid · Healthy Living Index</h1>
+<p><strong>¿Es Madrid una ciudad fácil para llevar una vida saludable? ¿Y lo es igual de fácil en todos sus barrios?</strong></p>
+<p>Este proyecto cruza datos abiertos de OpenStreetMap, INE, Ayuntamiento de Madrid y satélites Sentinel para construir un <strong>índice compuesto por barrio</strong> y evaluar la <strong>regla 3-30-300</strong> de urbanismo verde de Cecil Konijnendijk. La respuesta corta: la oferta urbana saludable correlaciona <strong>negativamente</strong> con la renta. La regla 3-30-300, en cambio, borra esa correlación. Cada componente capta una dimensión distinta.</p>
+<p><a href="#dashboard" class="btn btn-primary btn-lg">Ir al dashboard interactivo ↓</a> <a href="https://github.com/miguelferre/Madrid_HLI" class="btn btn-outline-secondary btn-lg" target="_blank">Ver código en GitHub</a></p>
+</section>
 </div>
-<div class="callout-body-container">
-<p><strong>Estado del documento:</strong> en construcción. Esta versión es el esqueleto inicial; las secciones se irán completando de forma incremental con datos reales.</p>
-</div>
-</div>
-</div>
-<section id="resumen-ejecutivo" class="level1 unnumbered">
-<h1 class="unnumbered">Resumen ejecutivo</h1>
-<p>¿Es Madrid una ciudad fácil para llevar una vida saludable? ¿Y lo es <strong>igual de fácil</strong> en todos sus barrios?</p>
-<p>Este documento responde a esas preguntas combinando datos abiertos (OpenStreetMap, INE, Ayuntamiento de Madrid, satélite Sentinel/Meta) con análisis espacial en R. El resultado es un <strong>Índice de Vida Saludable (IVS)</strong> por barrio y una evaluación del cumplimiento de la <strong>regla 3-30-300</strong> de urbanismo verde.</p>
-<div class="grid">
+<section id="cifras-clave" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="cifras-clave">Cifras clave</h2>
+<div class="grid key-numbers">
 <section id="section" class="level3 g-col-4 text-center">
 <h3 class="anchored" data-anchor-id="section"><strong>131</strong></h3>
 <p>barrios analizados</p>
 </section>
 <section id="section-1" class="level3 g-col-4 text-center">
-<h3 class="anchored" data-anchor-id="section-1"><strong>5</strong></h3>
-<p>capas de entrada</p>
+<h3 class="anchored" data-anchor-id="section-1"><strong>−0,26</strong></h3>
+<p>correlación HLI ↔︎ renta neta (Pearson)</p>
 </section>
 <section id="section-2" class="level3 g-col-4 text-center">
-<h3 class="anchored" data-anchor-id="section-2"><strong>3-30-300</strong></h3>
-<p>estándar de referencia</p>
+<h3 class="anchored" data-anchor-id="section-2"><strong>9 %</strong></h3>
+<p>mediana de barrios que cumplen las <strong>tres</strong> reglas 3-30-300</p>
 </section>
 </div>
 </section>
-<section id="marco-metodológico" class="level1">
-<h1>1 · Marco metodológico</h1>
-<section id="pregunta-de-investigación" class="level2">
-<h2 class="anchored" data-anchor-id="pregunta-de-investigación">1.1 Pregunta de investigación</h2>
-<p>Cuantificar, a nivel de barrio, la facilidad para llevar un estilo de vida saludable en el municipio de Madrid, integrando:</p>
-<ul>
-<li><strong>Acceso a alimentación saludable</strong> (fruterías, mercados, tiendas especializadas).</li>
-<li><strong>Acceso a actividad física</strong> (gimnasios, instalaciones deportivas).</li>
-<li><strong>Cercanía a espacios verdes</strong> (parques mayores de 15 ha).</li>
-<li><strong>Penetración de comida rápida</strong> como factor inverso.</li>
-<li><strong>Cubierta arbórea</strong> y proximidad a verde urbano (regla 3-30-300).</li>
-<li><strong>Equidad</strong>: ¿se distribuye el índice de forma justa respecto a la renta?</li>
-</ul>
-</section>
-<section id="pipeline-de-análisis" class="level2">
-<h2 class="anchored" data-anchor-id="pipeline-de-análisis">1.2 Pipeline de análisis</h2>
-<div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>Mostrar código</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  A[OSM&lt;br/&gt;Overpass] --&gt; B[Limpieza&lt;br/&gt;+ filtrado]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  C[Ayto Madrid&lt;br/&gt;distritos, barrios, arbolado] --&gt; B</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  D[INE&lt;br/&gt;renta + sec. censales] --&gt; B</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  E[Meta Canopy&lt;br/&gt;Height 1m] --&gt; B</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  B --&gt; F[KDE proyectado&lt;br/&gt;EPSG:25830]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  B --&gt; G[Isocronas&lt;br/&gt;peatonales dodgr]</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  F --&gt; H[Índice IVS&lt;br/&gt;por barrio]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  G --&gt; H</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  H --&gt; I[Cruce con renta&lt;br/&gt;+ regla 3-30-300]</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  I --&gt; J[Mapas + dashboard]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-pipeline" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-pipeline">flowchart LR
-  A[OSM&lt;br/&gt;Overpass] --&gt; B[Limpieza&lt;br/&gt;+ filtrado]
-  C[Ayto Madrid&lt;br/&gt;distritos, barrios, arbolado] --&gt; B
-  D[INE&lt;br/&gt;renta + sec. censales] --&gt; B
-  E[Meta Canopy&lt;br/&gt;Height 1m] --&gt; B
-  B --&gt; F[KDE proyectado&lt;br/&gt;EPSG:25830]
-  B --&gt; G[Isocronas&lt;br/&gt;peatonales dodgr]
-  F --&gt; H[Índice IVS&lt;br/&gt;por barrio]
-  G --&gt; H
-  H --&gt; I[Cruce con renta&lt;br/&gt;+ regla 3-30-300]
-  I --&gt; J[Mapas + dashboard]
-</pre>
+<section id="hallazgo" class="level2">
+<h2 class="anchored" data-anchor-id="hallazgo">Hallazgo principal</h2>
+<p>El <strong>HLI v1</strong> (índice compuesto a partir de densidad de comida saludable, deporte, parques y fast food) <strong>correlaciona negativamente con la renta</strong>: los barrios obreros del <strong>sur</strong> (Carabanchel, Usera, Puente de Vallecas) están mejor dotados que los barrios ricos del <strong>norte</strong> (Salamanca, Chamartín, Moncloa). El dinero no compra equidad en oferta de mercados, polideportivos ni parques.</p>
+<div class="figure-caption">
+<p><img src="figures/05_hli_vs_renta.png" class="img-fluid" alt="Scatter HLI vs renta con regresión negativa"> <em>HLI (eje Y) frente a renta neta por persona (eje X) para los 131 barrios. Cada punto es un barrio. La línea de regresión va hacia abajo: a más renta, peor HLI medio.</em></p>
 </div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;1: Pipeline de análisis
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="sec-datos" class="level1">
-<h1>2 · Datos</h1>
-<section id="marco-administrativo" class="level2">
-<h2 class="anchored" data-anchor-id="marco-administrativo">2.1 Marco administrativo</h2>
-<p>El análisis se hace sobre el <strong>término municipal de Madrid</strong> (604 km²), desagregado en sus <strong>21 distritos</strong> y <strong>131 barrios</strong> oficiales.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-mapa-base" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-mapa-base-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="outputs/figures/01_distritos_barrios.png" class="img-fluid figure-img" width="733">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mapa-base-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;2: Madrid municipio: 21 distritos y 131 barrios. Fuente: Ayuntamiento de Madrid · Geoportal IDEAM (CC BY 4.0).
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Los datos administrativos se descargan automáticamente del <a href="https://geoportal.madrid.es/">Geoportal IDEAM</a> y se almacenan localmente en <code>data/processed/</code> como GeoPackage en CRS <strong>EPSG:25830</strong> (ETRS89 / UTM 30N), el sistema oficial para España peninsular.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Reproducibilidad: ¿cómo se obtienen estos datos?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/01_descargar_datos.R"</span>)  <span class="co"># descarga + limpieza</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/02_mapa_base.R"</span>)        <span class="co"># mapa estático + interactivo</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>El script descarga los shapefiles desde el geoportal, los reproyecta a EPSG:25830, valida la geometría y deriva el polígono del término municipal por unión de los 21 distritos.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="capas-temáticas-openstreetmap" class="level2">
-<h2 class="anchored" data-anchor-id="capas-temáticas-openstreetmap">2.2 Capas temáticas (OpenStreetMap)</h2>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 30%">
-<col style="width: 30%">
-<col style="width: 40%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Capa</th>
-<th>Tags OSM utilizados</th>
-<th style="text-align: right;">Total POIs</th>
+<th></th>
+<th>alto HLI</th>
+<th>bajo HLI</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Comida saludable</td>
-<td><code>shop=greengrocer</code>, <code>shop=health_food</code>, <code>shop=herbalist</code>, <code>shop=deli</code>, <code>shop=nutrition_supplements</code>, <code>shop=farm</code>, <code>amenity=marketplace</code></td>
-<td style="text-align: right;"><strong>1.835</strong></td>
+<td><strong>renta alta</strong></td>
+<td>30 barrios</td>
+<td>36 barrios — <em>trampas</em></td>
 </tr>
 <tr class="even">
-<td>Actividad física</td>
-<td><code>leisure=fitness_centre</code>, <code>leisure=fitness_station</code>, <code>leisure=sports_centre</code></td>
-<td style="text-align: right;"><strong>5.971</strong></td>
-</tr>
-<tr class="odd">
-<td>Comida rápida</td>
-<td><code>amenity=fast_food</code></td>
-<td style="text-align: right;"><strong>1.454</strong></td>
-</tr>
-<tr class="even">
-<td>Espacios verdes</td>
-<td><code>leisure=park</code>, <code>landuse=forest</code> (≥ 1.000 m²)</td>
-<td style="text-align: right;"><strong>1.934</strong></td>
+<td><strong>renta baja</strong></td>
+<td>36 barrios — <em>gangas</em></td>
+<td>29 barrios</td>
 </tr>
 </tbody>
 </table>
+<ul>
+<li><em>Top “gangas”:</em> Comillas, Abrantes, Pradolongo, Zofío, San Isidro</li>
+<li><em>Top “trampas”:</em> Valdemarín, Recoletos, Fuentelarreina, El Viso, Castellana</li>
+<li><em>Caso extremo:</em> Sol — HLI 0,12, 123 fast food/km², 0 % cubierta verde</li>
+</ul>
+</section>
+<section id="tres-treinta-trescientos" class="level2">
+<h2 class="anchored" data-anchor-id="tres-treinta-trescientos">La regla 3-30-300</h2>
+<p>Cecil Konijnendijk (2021) propone un estándar simple para urbanismo verde:</p>
+<div class="grid rule-cards">
+<section id="section-3" class="level3 g-col-4">
+<h3 class="anchored" data-anchor-id="section-3">3</h3>
+<p><strong>árboles visibles</strong> desde la ventana</p>
+</section>
+<section id="section-4" class="level3 g-col-4">
+<h3 class="anchored" data-anchor-id="section-4">30 %</h3>
+<p><strong>cubierta arbórea</strong> en el entorno (250 m)</p>
+</section>
+<section id="m" class="level3 g-col-4">
+<h3 class="anchored" data-anchor-id="m">300 m</h3>
+<p>al <strong>parque ≥ 1 ha</strong> más cercano</p>
+</section>
+</div>
+<p>Hemos evaluado las tres reglas sobre <strong>605 K nodos del callejero</strong> de Madrid: rasterización del inventario municipal de árboles (793 K) para la regla 3, ESA WorldCover 2021 a 10 m para la regla 30, e isócronas peatonales reales con <code>dodgr</code> para la regla 300.</p>
+<div class="figure-caption">
+<p><img src="figures/14_panel_3_30_300.png" class="img-fluid" alt="Cuatro mapas: regla 3, regla 30, regla 300 y score combinado"> <em>Las tres reglas y el score combinado por barrio. Madrid suspende: solo el 9 % mediano de los barrios cumple las tres a la vez.</em></p>
+</div>
+<p><strong>Lo interesante:</strong> el <strong>score combinado borra la correlación con renta</strong> (Pearson −0,04 vs −0,26 del HLI v1). Cada componente capta una dimensión distinta y se compensan: la regla 3 (alineación viario) favorece a los barrios densos del centro; la regla 30 (canopy continuo) favorece zonas periféricas con grandes parques; la regla 300 (acceso a parque) reproduce el patrón sur-rico-mejor del HLI.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Tensión Salamanca.</strong> Castellana, Goya y Lista alcanzan el <strong>100 %</strong> en regla 3 (alineaciones viarias densas) pero <strong>0 %</strong> en regla 30: los árboles individuales de viario no llegan al 30 % de cubierta continua según ESA WorldCover. El estándar 3-30-300 está pensado precisamente para detectar esta diferencia entre “hay árboles” y “hay barrio verde”.</p>
+</div>
+</div>
+</section>
+<section id="dashboard" class="level2">
+<h2 class="anchored" data-anchor-id="dashboard">Dashboard interactivo</h2>
+<p>Explora los 131 barrios y sus 14 indicadores. Hasta 6 barrios comparados a la vez en radar, tabla descargable, scatter de equidad.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -322,132 +205,110 @@ Nota
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Decisión metodológica.</strong> Los tags de la capa “comida saludable” se eligen tras verificar contra Taginfo y la API Overpass que <code>shop=organic</code> (0 elementos) y <code>marketplace=farmers_market</code> (0 elementos) no se utilizan en Madrid, mientras que <code>shop=supermarket</code> es demasiado laxo (incluye Mercadona, Lidl, etc.). Se priorizan tiendas especializadas y mercados.</p>
+<p>La primera carga del dashboard tarda <strong>30–60 s</strong>: el navegador descarga R + paquetes WASM (<code>shinylive</code>). En recargas posteriores arranca al instante.</p>
+</div>
+</div>
+<div class="dashboard-frame">
+<iframe src="app/" width="100%" height="850" frameborder="0" loading="lazy" title="Madrid HLI dashboard">
+</iframe>
+</div>
+<p><a href="app/" class="btn btn-outline-primary" target="_blank">Abrir el dashboard en pantalla completa</a></p>
+</section>
+<section id="galeria" class="level2">
+<h2 class="anchored" data-anchor-id="galeria">Galería de mapas estáticos</h2>
+<p>Para inspección rápida sin esperar a que arranque el dashboard:</p>
+<div class="grid map-gallery">
+<div class="g-col-6 map-card">
+<p><strong><a href="maps/03_hli_interactivo.html">Ranking HLI por barrio</a></strong> Coroplético del HLI v1. Pulsa cada barrio para ver desglose de los 4 componentes.</p>
+</div>
+<div class="g-col-6 map-card">
+<p><strong><a href="maps/04_equidad_interactivo.html">HLI ↔︎ renta + residual</a></strong> Tres capas: HLI, renta neta y residual del modelo HLI ~ renta.</p>
+</div>
+<div class="g-col-6 map-card">
+<p><strong><a href="maps/05_accesibilidad_interactivo.html">Accesibilidad peatonal</a></strong> % de nodos con parque ≥ 1 ha a 5/10/15 minutos andando (isócronas dodgr).</p>
+</div>
+<div class="g-col-6 map-card">
+<p><strong><a href="maps/06_3_30_300_interactivo.html">Regla 3-30-300</a></strong> Cuatro capas: regla 3, regla 30, regla 300 y score combinado.</p>
 </div>
 </div>
 </section>
+<section id="metodologia" class="level2">
+<h2 class="anchored" data-anchor-id="metodologia">Metodología compacta</h2>
+<ol type="1">
+<li><strong>Capas OSM</strong> (Overpass + Geofabrik): comida saludable, gimnasios, fast food, parques. Whitelist explícita por tag tras validación visual; rescate manual de Casa de Campo (1.373 ha).</li>
+<li><strong>KDE proyectado</strong> (EPSG:25830) con bandwidth de Scott — densidades en metros, no en grados.</li>
+<li><strong>Agregación a 131 barrios:</strong> densidad de POIs / km² + % cubierta de parques.</li>
+<li><strong>HLI compuesto:</strong> media de 4 indicadores normalizados al rango [0,1] con cuantiles 5–95 (robusto a outliers como Sol con 123 fast food/km²); fast food invertido.</li>
+<li><strong>Renta:</strong> ADRH 2023 del INE — agregada de sección censal a barrio por intersección espacial.</li>
+<li><strong>Accesibilidad</strong> con <code>dodgr</code>: red peatonal real (152 K segmentos · 605 K vértices), distancia al parque ≥1 ha más cercano, isócronas a 5 / 10 / 15 min (4,8 km/h).</li>
+<li><strong>Regla 3-30-300:</strong> evaluada por nodo. <em>Regla 3</em> — <code>terra::rasterize</code> de los 793 K árboles + focal sum en buffer 50 m. <em>Regla 30</em> — ESA WorldCover 2021 v200 (10 m, clase Tree cover) + focal sum en 250 m. <em>Regla 300</em> — equivale a <code>acc_5min</code>. Score = % nodos del barrio que cumplen las tres a la vez.</li>
+<li><strong>Dashboard</strong> en <code>shinylive</code> (Shiny ejecutándose en el navegador como WebAssembly puro). Sin servidor.</li>
+</ol>
 </section>
-<section id="sec-densidades" class="level1">
-<h1>3 · Densidades y distancias</h1>
-<section id="kde-proyectado" class="level2">
-<h2 class="anchored" data-anchor-id="kde-proyectado">3.1 KDE proyectado</h2>
-<p>La estimación de densidad por kernel se calcula sobre el sistema <strong>EPSG:25830</strong> (metros) — corrigiendo el error metodológico de la versión original, que ejecutaba el KDE en grados geográficos. El bandwidth se calcula automáticamente con la regla de Scott vía <code>spatstat::bw.scott()</code>.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-kde" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-kde-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="outputs/figures/02_kde_panel.png" class="img-fluid figure-img" width="1067">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kde-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;3: Densidad de equipamientos por km² (KDE 100 m, recortado al municipio).
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Las tres capas tienen estructuras espaciales diferentes:</p>
-<ul>
-<li><strong>Comida saludable</strong> muestra un núcleo intenso en Centro (mercados históricos) y picos secundarios en distritos residenciales acomodados (Salamanca, Chamberí).</li>
-<li><strong>Actividad física</strong> está distribuida de forma más homogénea por toda la ciudad, con concentraciones en distritos centrales y ensanches.</li>
-<li><strong>Comida rápida</strong> se concentra en el Centro (turismo) y en arterias comerciales periféricas.</li>
-</ul>
-<blockquote class="blockquote">
-<p><em>Análisis a nivel barrio + isocronas peatonales — siguiente iteración.</em></p>
-</blockquote>
+<section id="fuentes" class="level2">
+<h2 class="anchored" data-anchor-id="fuentes">Fuentes de datos</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Capa</th>
+<th>Fuente</th>
+<th>Licencia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>POIs (gimnasios, comida, fast food, parques)</td>
+<td>OpenStreetMap (Overpass + Geofabrik)</td>
+<td>ODbL</td>
+</tr>
+<tr class="even">
+<td>Distritos y barrios</td>
+<td>Ayuntamiento de Madrid · Geoportal IDEAM</td>
+<td>CC BY 4.0</td>
+</tr>
+<tr class="odd">
+<td>Renta por sección censal</td>
+<td>INE — ADRH 2023 (tabla 30824)</td>
+<td>Reutilización libre</td>
+</tr>
+<tr class="even">
+<td>Cartografía secciones censales</td>
+<td>INE — Cartografía Digitalizada 2024</td>
+<td>Reutilización libre</td>
+</tr>
+<tr class="odd">
+<td>Arbolado urbano (793 K árboles)</td>
+<td>datos.madrid.es · dataset 300761</td>
+<td>CC BY 4.0</td>
+</tr>
+<tr class="even">
+<td>Cubierta arbórea</td>
+<td>ESA WorldCover 2021 v200 (10 m)</td>
+<td>CC BY 4.0</td>
+</tr>
+<tr class="odd">
+<td>Basemaps</td>
+<td>MapTiler · CartoDB</td>
+<td>API key / gratuito</td>
+</tr>
+</tbody>
+</table>
 </section>
-</section>
-<section id="sec-ivs" class="level1">
-<h1>4 · Índice de Vida Saludable</h1>
-<blockquote class="blockquote">
-<p><em>Sección a completar.</em></p>
-</blockquote>
-</section>
-<section id="sec-regla" class="level1">
-<h1>5 · La regla 3-30-300</h1>
-<p>La regla <strong>3-30-300</strong> propuesta por Cecil Konijnendijk (2021) es un estándar simple y accionable de urbanismo verde:</p>
-<div class="grid">
-<section id="section-3" class="level2 g-col-4 text-center">
-<h2 class="anchored" data-anchor-id="section-3">3</h2>
-<p><strong>árboles visibles</strong> desde cada vivienda</p>
-</section>
-<section id="section-4" class="level2 g-col-4 text-center">
-<h2 class="anchored" data-anchor-id="section-4">30 %</h2>
-<p><strong>cubierta arbórea</strong> por barrio</p>
-</section>
-<section id="m" class="level2 g-col-4 text-center">
-<h2 class="anchored" data-anchor-id="m">300 m</h2>
-<p>al <strong>espacio verde</strong> más cercano</p>
-</section>
+<section id="sobre-el-proyecto" class="level2">
+<h2 class="anchored" data-anchor-id="sobre-el-proyecto">Sobre el proyecto</h2>
+<p>Proyecto inicialmente desarrollado en un curso de SIG con R, refactorizado como pieza de portfolio. <strong>18 scripts R numerados</strong> generan toda la cadena reproducible desde descarga de datos crudos hasta los mapas, la app y este documento. El pipeline se restaura con <code>renv::restore()</code> y se ejecuta con un bucle sobre <code>R/*.R</code>.</p>
+<p><a href="https://github.com/miguelferre/Madrid_HLI" class="btn btn-primary" target="_blank">Repositorio en GitHub</a></p>
+<div class="footer-note">
+<p><em>Análisis y documento por Miguel Ferreiro García · datos abiertos del Ayuntamiento de Madrid, INE, OSM y ESA · <code>r format(Sys.Date(), '%B de %Y')</code>.</em></p>
 </div>
-<blockquote class="blockquote">
-<p><em>Análisis a completar.</em></p>
-</blockquote>
-</section>
-<section id="sec-equidad" class="level1">
-<h1>6 · Equidad y conclusiones</h1>
-<blockquote class="blockquote">
-<p><em>Sección a completar.</em></p>
-</blockquote>
 </section>
 
-
-<div id="quarto-appendix" class="default"><section id="apéndice-reproducibilidad" class="level1 appendix"><h2 class="anchored quarto-appendix-heading">Apéndice · Reproducibilidad</h2><div class="quarto-appendix-contents">
-
-<div class="cell">
-<details class="code-fold">
-<summary>Información de la sesión R</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>R version 4.5.2 (2025-10-31 ucrt)
-Platform: x86_64-w64-mingw32/x64
-Running under: Windows 11 x64 (build 26200)
-
-Matrix products: default
-  LAPACK version 3.12.1
-
-locale:
-[1] LC_COLLATE=Spanish_Spain.utf8  LC_CTYPE=Spanish_Spain.utf8   
-[3] LC_MONETARY=Spanish_Spain.utf8 LC_NUMERIC=C                  
-[5] LC_TIME=Spanish_Spain.utf8    
-
-time zone: Europe/Madrid
-tzcode source: internal
-
-attached base packages:
-[1] stats     graphics  grDevices datasets  utils     methods   base     
-
-other attached packages:
-[1] ggplot2_4.0.2 dplyr_1.1.4   sf_1.0-23    
-
-loaded via a namespace (and not attached):
- [1] gtable_0.3.6       jsonlite_2.0.0     compiler_4.5.2     renv_1.2.2        
- [5] tidyselect_1.2.1   Rcpp_1.1.0         png_0.1-8          scales_1.4.0      
- [9] yaml_2.3.12        fastmap_1.2.0      R6_2.6.1           generics_0.1.4    
-[13] classInt_0.4-11    knitr_1.51         htmlwidgets_1.6.4  tibble_3.3.0      
-[17] units_1.0-0        DBI_1.2.3          pillar_1.11.1      RColorBrewer_1.1-3
-[21] rlang_1.2.0        xfun_0.55          S7_0.2.1           otel_0.2.0        
-[25] cli_3.6.6          withr_3.0.2        magrittr_2.0.4     class_7.3-23      
-[29] digest_0.6.39      grid_4.5.2         lifecycle_1.0.5    vctrs_0.6.5       
-[33] KernSmooth_2.23-26 proxy_0.4-28       evaluate_1.0.5     glue_1.8.0        
-[37] farver_2.1.2       e1071_1.7-17       rmarkdown_2.30     tools_4.5.2       
-[41] pkgconfig_2.0.3    htmltools_0.5.9   </code></pre>
-</div>
-</div>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>Código fuente:</strong> <a href="https://github.com/MiguelFerreiro/Madrid_HLI">github.com/MiguelFerreiro/Madrid_HLI</a> (próximamente)</p>
-</div>
-</div>
-</div>
-<!-- -->
-
-</div></section></div></main>
+</main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -519,57 +380,6 @@ loaded via a namespace (and not attached):
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
-    }
-    const viewSource = window.document.getElementById('quarto-view-source') ||
-                       window.document.getElementById('quarto-code-tools-source');
-    if (viewSource) {
-      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-      viewSource.addEventListener("click", function(e) {
-        if (sourceUrl) {
-          // rstudio viewer pane
-          if (/\bcapabilities=\b/.test(window.location)) {
-            window.open(sourceUrl);
-          } else {
-            window.location.href = sourceUrl;
-          }
-        } else {
-          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-          modal.show();
-        }
-        return false;
-      });
-    }
-    function toggleCodeHandler(show) {
-      return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
-          if (show) {
-            details.open = true;
-          } else {
-            details.removeAttribute("open");
-          }
-        }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-        const fromCls = show ? "hidden" : "unhidden";
-        const toCls = show ? "unhidden" : "hidden";
-        for (let i=0; i<cellCodeDivs.length; i++) {
-          const codeDiv = cellCodeDivs[i];
-          if (codeDiv.classList.contains(fromCls)) {
-            codeDiv.classList.remove(fromCls);
-            codeDiv.classList.add(toCls);
-          } 
-        }
-        return false;
-      }
-    }
-    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-    if (hideAllCode) {
-      hideAllCode.addEventListener("click", toggleCodeHandler(false));
-    }
-    const showAllCode = window.document.getElementById("quarto-show-all-code");
-    if (showAllCode) {
-      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -899,226 +709,7 @@ loaded via a namespace (and not attached):
       }
     }
   });
-  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Ejecutar el código</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Madrid · Healthy Living Index"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Análisis espacial de la habitabilidad saludable y la regla 3-30-300"</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Miguel Ferreiro García"</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> "MMMM YYYY"</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="an">lang:</span><span class="co"> es</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">    theme:</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">      - cosmo</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">      - assets/styles.scss</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-location: left</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 3</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-title: "Contenido"</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co">    code-summary: "Mostrar código"</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-width: 10</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-height: 7</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co">    fig-align: center</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co">    embed-resources: false</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co">    smooth-scroll: true</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co">    page-layout: full</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co">    grid:</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co">      sidebar-width: 280px</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co">      body-width: 1100px</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co">      margin-width: 220px</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co">  freeze: auto</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="an">knitr:</span></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co">  opts_chunk:</span></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co">    dev: png</span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co">    dpi: 144</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar utilidades del proyecto</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/utils.R"</span>)</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes principales (se cargarán bajo demanda en cada sección)</span></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>({</span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(sf)</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>::: {.callout-note appearance="simple"}</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>**Estado del documento:** en construcción. Esta versión es el esqueleto inicial; las secciones se irán completando de forma incremental con datos reales.</span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a><span class="fu"># Resumen ejecutivo {.unnumbered}</span></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>¿Es Madrid una ciudad fácil para llevar una vida saludable? ¿Y lo es **igual de fácil** en todos sus barrios?</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>Este documento responde a esas preguntas combinando datos abiertos (OpenStreetMap, INE, Ayuntamiento de Madrid, satélite Sentinel/Meta) con análisis espacial en R. El resultado es un **Índice de Vida Saludable (IVS)** por barrio y una evaluación del cumplimiento de la **regla 3-30-300** de urbanismo verde.</span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>::: {.grid}</span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>::: {.g-col-4 .text-center}</span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### **131**</span></span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>barrios analizados</span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>::: {.g-col-4 .text-center}</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### **5**</span></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>capas de entrada</span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>::: {.g-col-4 .text-center}</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a><span class="fu">### **3-30-300**</span></span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>estándar de referencia</span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="fu"># 1 · Marco metodológico</span></span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1.1 Pregunta de investigación</span></span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>Cuantificar, a nivel de barrio, la facilidad para llevar un estilo de vida saludable en el municipio de Madrid, integrando:</span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Acceso a alimentación saludable** (fruterías, mercados, tiendas especializadas).</span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Acceso a actividad física** (gimnasios, instalaciones deportivas).</span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Cercanía a espacios verdes** (parques mayores de 15 ha).</span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Penetración de comida rápida** como factor inverso.</span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Cubierta arbórea** y proximidad a verde urbano (regla 3-30-300).</span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Equidad**: ¿se distribuye el índice de forma justa respecto a la renta?</span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1.2 Pipeline de análisis</span></span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>%%| label: fig-pipeline</span>
-<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>%%| fig-cap: <span class="ot">"</span><span class="st">Pipeline de análisis</span><span class="ot">"</span></span>
-<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>  A[OSM&lt;br/&gt;Overpass] --&gt; B[Limpieza&lt;br/&gt;+ filtrado]</span>
-<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>  C[Ayto Madrid&lt;br/&gt;distritos, barrios, arbolado] --&gt; B</span>
-<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>  D[INE&lt;br/&gt;renta + sec. censales] --&gt; B</span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>  E[Meta Canopy&lt;br/&gt;Height <span class="dv">1</span>m] --&gt; B</span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>  B --&gt; F[KDE proyectado&lt;br/&gt;EPSG:<span class="dv">25830</span>]</span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>  B --&gt; G[Isocronas&lt;br/&gt;peatonales dodgr]</span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>  F --&gt; H[Índice IVS&lt;br/&gt;por barrio]</span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>  G --&gt; H</span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>  H --&gt; I[Cruce con renta&lt;br/&gt;+ regla <span class="dv">3-30-300</span>]</span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>  I --&gt; J[Mapas + dashboard]</span>
-<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="fu"># 2 · Datos {#sec-datos}</span></span>
-<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.1 Marco administrativo</span></span>
-<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>El análisis se hace sobre el **término municipal de Madrid** (604 km²), desagregado en sus **21 distritos** y **131 barrios** oficiales.</span>
-<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a><span class="in">```{r mapa-base}</span></span>
-<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-mapa-base</span></span>
-<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Madrid municipio: 21 distritos y 131 barrios. Fuente: Ayuntamiento de Madrid · Geoportal IDEAM (CC BY 4.0)."</span></span>
-<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 9</span></span>
-<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 9</span></span>
-<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"outputs/figures/01_distritos_barrios.png"</span>)</span>
-<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a>Los datos administrativos se descargan automáticamente del <span class="co">[</span><span class="ot">Geoportal IDEAM</span><span class="co">](https://geoportal.madrid.es/)</span> y se almacenan localmente en <span class="in">`data/processed/`</span> como GeoPackage en CRS **EPSG:25830** (ETRS89 / UTM 30N), el sistema oficial para España peninsular.</span>
-<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reproducibilidad: ¿cómo se obtienen estos datos?</span></span>
-<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a><span class="in">```r</span></span>
-<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/01_descargar_datos.R"</span>)  <span class="co"># descarga + limpieza</span></span>
-<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/02_mapa_base.R"</span>)        <span class="co"># mapa estático + interactivo</span></span>
-<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>El script descarga los shapefiles desde el geoportal, los reproyecta a EPSG:25830, valida la geometría y deriva el polígono del término municipal por unión de los 21 distritos.</span>
-<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2.2 Capas temáticas (OpenStreetMap)</span></span>
-<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Capa <span class="pp">|</span> Tags OSM utilizados <span class="pp">|</span> Total POIs <span class="pp">|</span></span>
-<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---:|</span></span>
-<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Comida saludable <span class="pp">|</span> <span class="in">`shop=greengrocer`</span>, <span class="in">`shop=health_food`</span>, <span class="in">`shop=herbalist`</span>, <span class="in">`shop=deli`</span>, <span class="in">`shop=nutrition_supplements`</span>, <span class="in">`shop=farm`</span>, <span class="in">`amenity=marketplace`</span> <span class="pp">|</span> **1.835** <span class="pp">|</span></span>
-<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Actividad física <span class="pp">|</span> <span class="in">`leisure=fitness_centre`</span>, <span class="in">`leisure=fitness_station`</span>, <span class="in">`leisure=sports_centre`</span> <span class="pp">|</span> **5.971** <span class="pp">|</span></span>
-<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Comida rápida <span class="pp">|</span> <span class="in">`amenity=fast_food`</span> <span class="pp">|</span> **1.454** <span class="pp">|</span></span>
-<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Espacios verdes <span class="pp">|</span> <span class="in">`leisure=park`</span>, <span class="in">`landuse=forest`</span> (≥ 1.000 m²) <span class="pp">|</span> **1.934** <span class="pp">|</span></span>
-<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a>**Decisión metodológica.** Los tags de la capa "comida saludable" se eligen tras verificar contra Taginfo y la API Overpass que <span class="in">`shop=organic`</span> (0 elementos) y <span class="in">`marketplace=farmers_market`</span> (0 elementos) no se utilizan en Madrid, mientras que <span class="in">`shop=supermarket`</span> es demasiado laxo (incluye Mercadona, Lidl, etc.). Se priorizan tiendas especializadas y mercados.</span>
-<span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a><span class="fu"># 3 · Densidades y distancias {#sec-densidades}</span></span>
-<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3.1 KDE proyectado</span></span>
-<span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a>La estimación de densidad por kernel se calcula sobre el sistema **EPSG:25830** (metros) — corrigiendo el error metodológico de la versión original, que ejecutaba el KDE en grados geográficos. El bandwidth se calcula automáticamente con la regla de Scott vía <span class="in">`spatstat::bw.scott()`</span>.</span>
-<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-162"><a href="#cb5-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r kde-panel}</span></span>
-<span id="cb5-163"><a href="#cb5-163" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-kde</span></span>
-<span id="cb5-164"><a href="#cb5-164" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Densidad de equipamientos por km² (KDE 100 m, recortado al municipio)."</span></span>
-<span id="cb5-165"><a href="#cb5-165" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 16</span></span>
-<span id="cb5-166"><a href="#cb5-166" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 7</span></span>
-<span id="cb5-167"><a href="#cb5-167" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb5-168"><a href="#cb5-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-169"><a href="#cb5-169" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"outputs/figures/02_kde_panel.png"</span>)</span>
-<span id="cb5-170"><a href="#cb5-170" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-171"><a href="#cb5-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-172"><a href="#cb5-172" aria-hidden="true" tabindex="-1"></a>Las tres capas tienen estructuras espaciales diferentes:</span>
-<span id="cb5-173"><a href="#cb5-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-174"><a href="#cb5-174" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Comida saludable** muestra un núcleo intenso en Centro (mercados históricos) y picos secundarios en distritos residenciales acomodados (Salamanca, Chamberí).</span>
-<span id="cb5-175"><a href="#cb5-175" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Actividad física** está distribuida de forma más homogénea por toda la ciudad, con concentraciones en distritos centrales y ensanches.</span>
-<span id="cb5-176"><a href="#cb5-176" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Comida rápida** se concentra en el Centro (turismo) y en arterias comerciales periféricas.</span>
-<span id="cb5-177"><a href="#cb5-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-178"><a href="#cb5-178" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; _Análisis a nivel barrio + isocronas peatonales — siguiente iteración._</span></span>
-<span id="cb5-179"><a href="#cb5-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-180"><a href="#cb5-180" aria-hidden="true" tabindex="-1"></a><span class="fu"># 4 · Índice de Vida Saludable {#sec-ivs}</span></span>
-<span id="cb5-181"><a href="#cb5-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-182"><a href="#cb5-182" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; _Sección a completar._</span></span>
-<span id="cb5-183"><a href="#cb5-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-184"><a href="#cb5-184" aria-hidden="true" tabindex="-1"></a><span class="fu"># 5 · La regla 3-30-300 {#sec-regla}</span></span>
-<span id="cb5-185"><a href="#cb5-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-186"><a href="#cb5-186" aria-hidden="true" tabindex="-1"></a>La regla **3-30-300** propuesta por Cecil Konijnendijk (2021) es un estándar simple y accionable de urbanismo verde:</span>
-<span id="cb5-187"><a href="#cb5-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-188"><a href="#cb5-188" aria-hidden="true" tabindex="-1"></a>::: {.grid}</span>
-<span id="cb5-189"><a href="#cb5-189" aria-hidden="true" tabindex="-1"></a>::: {.g-col-4 .text-center}</span>
-<span id="cb5-190"><a href="#cb5-190" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3</span></span>
-<span id="cb5-191"><a href="#cb5-191" aria-hidden="true" tabindex="-1"></a>**árboles visibles** desde cada vivienda</span>
-<span id="cb5-192"><a href="#cb5-192" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-193"><a href="#cb5-193" aria-hidden="true" tabindex="-1"></a>::: {.g-col-4 .text-center}</span>
-<span id="cb5-194"><a href="#cb5-194" aria-hidden="true" tabindex="-1"></a><span class="fu">## 30 %</span></span>
-<span id="cb5-195"><a href="#cb5-195" aria-hidden="true" tabindex="-1"></a>**cubierta arbórea** por barrio</span>
-<span id="cb5-196"><a href="#cb5-196" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-197"><a href="#cb5-197" aria-hidden="true" tabindex="-1"></a>::: {.g-col-4 .text-center}</span>
-<span id="cb5-198"><a href="#cb5-198" aria-hidden="true" tabindex="-1"></a><span class="fu">## 300 m</span></span>
-<span id="cb5-199"><a href="#cb5-199" aria-hidden="true" tabindex="-1"></a>al **espacio verde** más cercano</span>
-<span id="cb5-200"><a href="#cb5-200" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-201"><a href="#cb5-201" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-202"><a href="#cb5-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-203"><a href="#cb5-203" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; _Análisis a completar._</span></span>
-<span id="cb5-204"><a href="#cb5-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-205"><a href="#cb5-205" aria-hidden="true" tabindex="-1"></a><span class="fu"># 6 · Equidad y conclusiones {#sec-equidad}</span></span>
-<span id="cb5-206"><a href="#cb5-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-207"><a href="#cb5-207" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; _Sección a completar._</span></span>
-<span id="cb5-208"><a href="#cb5-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-209"><a href="#cb5-209" aria-hidden="true" tabindex="-1"></a><span class="fu"># Apéndice · Reproducibilidad {.appendix}</span></span>
-<span id="cb5-210"><a href="#cb5-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-211"><a href="#cb5-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{r session-info}</span></span>
-<span id="cb5-212"><a href="#cb5-212" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb5-213"><a href="#cb5-213" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Información de la sesión R"</span></span>
-<span id="cb5-214"><a href="#cb5-214" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span>
-<span id="cb5-215"><a href="#cb5-215" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-216"><a href="#cb5-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-217"><a href="#cb5-217" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip appearance="simple"}</span>
-<span id="cb5-218"><a href="#cb5-218" aria-hidden="true" tabindex="-1"></a>**Código fuente:** <span class="co">[</span><span class="ot">github.com/MiguelFerreiro/Madrid_HLI</span><span class="co">](https://github.com/MiguelFerreiro/Madrid_HLI)</span> (próximamente)</span>
-<span id="cb5-219"><a href="#cb5-219" aria-hidden="true" tabindex="-1"></a>:::</span>
-</code></pre></div><button title="Copiar al portapapeles" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
-</div></div></div></div></div>
+  </script>
 </div> <!-- /content -->
 
 
