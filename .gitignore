@@ -36,6 +36,9 @@ data/processed/red_peatonal_nodos.gpkg
 _freeze/
 .ipynb_checkpoints/
 *_files/
+# excepción: los _files de docs/ son los assets publicados de Quarto y leaflet
+!docs/**/*_files/
+!docs/**/*_files/**
 /.quarto/
 
 # --- OS ---

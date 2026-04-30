@@ -175,7 +175,7 @@ Cuatro capas: regla 3, regla 30, regla 300 y score combinado.
 
 ## Sobre el proyecto
 
-Proyecto inicialmente desarrollado en un curso de SIG con R, refactorizado como pieza de portfolio. **18 scripts R numerados** generan toda la cadena reproducible desde descarga de datos crudos hasta los mapas, la app y este documento. El pipeline se restaura con `renv::restore()` y se ejecuta con un bucle sobre `R/*.R`.
+Proyecto inicialmente desarrollado en un curso de SIG con R y refactorizado en abril de 2026. **18 scripts R numerados** generan toda la cadena reproducible desde descarga de datos crudos hasta los mapas, la app y este documento. El pipeline se restaura con `renv::restore()` y se ejecuta con un bucle sobre `R/*.R`.
 
 [Repositorio en GitHub](https://github.com/miguelferre/Madrid_HLI){.btn .btn-primary target="_blank"}
 
