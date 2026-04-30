@@ -24,6 +24,13 @@ data/raw/
 *.zip
 *.tif
 
+# --- Datos procesados pesados (regenerables con el pipeline R) ---
+# Excluidos del repo por superar los límites de GitHub:
+#   - arbolado_madrid.gpkg (~111 MB) → se regenera con R/13_arbolado_madrid.R
+#   - red_peatonal_nodos.gpkg (~78 MB) → se regenera con R/11/14/15/16
+data/processed/arbolado_madrid.gpkg
+data/processed/red_peatonal_nodos.gpkg
+
 # --- Quarto / Jupyter ---
 .quarto/
 _freeze/
