@@ -2,11 +2,14 @@
 
 > Análisis espacial del nivel de vida saludable en la ciudad de Madrid, cruzado con el estándar urbanístico **3-30-300** y datos socioeconómicos.
 
-![status](https://img.shields.io/badge/estado-en%20desarrollo-orange) ![R](https://img.shields.io/badge/R-4.5-blue) ![license](https://img.shields.io/badge/license-MIT-green)
+[![web](https://img.shields.io/badge/web-miguelferre.github.io%2FMadrid__HLI-3d7068)](https://miguelferre.github.io/Madrid_HLI/) [![dashboard](https://img.shields.io/badge/dashboard-shinylive-3d7068)](https://miguelferre.github.io/Madrid_HLI/app/) ![R](https://img.shields.io/badge/R-4.5-blue) ![license](https://img.shields.io/badge/license-MIT-green)
+
+**Web del proyecto:** <https://miguelferre.github.io/Madrid_HLI/>
+**Dashboard interactivo (shinylive):** <https://miguelferre.github.io/Madrid_HLI/app/>
 
 ## ¿Qué hace este proyecto?
 
-Combina datos abiertos de OpenStreetMap, INE, Ayuntamiento de Madrid y satélites Sentinel/Meta para responder preguntas concretas sobre la habitabilidad saludable del municipio:
+Combina datos abiertos de OpenStreetMap, INE, Ayuntamiento de Madrid y ESA WorldCover para responder preguntas concretas sobre la habitabilidad saludable del municipio:
 
 - ¿Dónde es **fácil** llevar un estilo de vida saludable en Madrid?
 - ¿Cuántos barrios cumplen la regla **3-30-300** de urbanismo verde de Cecil Konijnendijk?

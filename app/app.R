@@ -288,12 +288,12 @@ server <- function(input, output, session) {
          </table></div>",
       df$NOMBRE, df$NOMDIS,
       m$label,
-      formatC(df[[input$var]], format = "f", digits = 2, big.mark = "."),
+      formatC(df[[input$var]], format = "f", digits = 2, big.mark = ".", decimal.mark = ","),
       m$unidad,
       df$HLI, df$ranking,
       df$score_3_30_300, df$rank_3_30_300,
       ifelse(is.na(df$renta_neta_persona), "—",
-              formatC(df$renta_neta_persona, big.mark = ".", format = "d")),
+              formatC(df$renta_neta_persona, big.mark = ".", decimal.mark = ",", format = "d")),
       df$acc_5min, df$dens_arboles_ha
     )
 
@@ -403,7 +403,7 @@ server <- function(input, output, session) {
     plot_ly(df, x = ~renta_neta_persona, y = ~HLI,
             text = ~paste0(NOMBRE, " · ", NOMDIS,
                             "<br>HLI: ", round(HLI, 3),
-                            "<br>Renta: ", formatC(renta_neta_persona, big.mark = ".", format = "d"), " €"),
+                            "<br>Renta: ", formatC(renta_neta_persona, big.mark = ".", decimal.mark = ",", format = "d"), " €"),
             hoverinfo = "text", type = "scatter", mode = "markers",
             marker = list(color = "#0f766e", size = 8, opacity = 0.7,
                           line = list(color = "white", width = 1))) |>
@@ -429,7 +429,7 @@ server <- function(input, output, session) {
     plot_ly(df, x = ~renta_neta_persona, y = ~score_3_30_300,
             text = ~paste0(NOMBRE, " · ", NOMDIS,
                             "<br>Score: ", round(score_3_30_300, 1), " %",
-                            "<br>Renta: ", formatC(renta_neta_persona, big.mark = ".", format = "d"), " €"),
+                            "<br>Renta: ", formatC(renta_neta_persona, big.mark = ".", decimal.mark = ",", format = "d"), " €"),
             hoverinfo = "text", type = "scatter", mode = "markers",
             marker = list(color = "#7c3aed", size = 8, opacity = 0.7,
                           line = list(color = "white", width = 1))) |>
