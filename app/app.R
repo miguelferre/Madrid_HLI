@@ -87,8 +87,7 @@ for (v in VAR_RADAR) barrios_norm[[paste0(v, "_n")]] <- normaliza_01(barrios_nor
 
 ui <- page_navbar(
   title = "Madrid · Healthy Living Index",
-  theme = bs_theme(bootswatch = "minty",
-                    base_font = font_google("Inter")),
+  theme = bs_theme(bootswatch = "minty"),
   fillable = TRUE,
 
   nav_panel(
