@@ -6,42 +6,97 @@
 
 ## ¿Qué hace este proyecto?
 
-Combina datos abiertos de OpenStreetMap, INE, Ayuntamiento de Madrid y satélites Sentinel/Meta para responder a preguntas concretas sobre la habitabilidad saludable del municipio:
+Combina datos abiertos de OpenStreetMap, INE, Ayuntamiento de Madrid y satélites Sentinel/Meta para responder preguntas concretas sobre la habitabilidad saludable del municipio:
 
 - ¿Dónde es **fácil** llevar un estilo de vida saludable en Madrid?
 - ¿Cuántos barrios cumplen la regla **3-30-300** de urbanismo verde de Cecil Konijnendijk?
 - ¿Hay **desigualdad** entre barrios? ¿Correlaciona el índice con la renta?
 - ¿Cuáles son los barrios mejor y peor servidos?
 
+## Hallazgo principal (versión actual)
+
+El **HLI correlaciona negativamente con la renta** en Madrid (Pearson −0,26; Spearman −0,25). Los barrios con mejor dotación pública para una vida saludable se concentran en el **sur obrero** (Carabanchel, Usera, Puente de Vallecas), mientras que los barrios de mayor renta del **norte** (Salamanca, Chamartín, Moncloa) caen al fondo del ranking. La equidad en oferta de mercados, polideportivos y parques no la compra el dinero.
+
+| | alto HLI | bajo HLI |
+|---|---|---|
+| **renta alta** | 30 barrios | 36 barrios — *trampas* |
+| **renta baja** | 36 barrios — *gangas* | 29 barrios |
+
+- *Top "gangas":* Comillas, Abrantes, Pradolongo, Zofío, San Isidro
+- *Top "trampas":* Valdemarín, Recoletos, Fuentelarreina, El Viso, Castellana
+- *Caso extremo:* Sol — HLI 0,12, 123 fast food/km², 0% cubierta verde
+
 ## Estructura del repositorio
 
 ```
 Madrid_HLI/
 ├── index.qmd              # documento Quarto principal (en construcción)
-├── R/                     # funciones reutilizables
+├── R/                     # pipeline numerado de scripts
+│   ├── 01_descargar_admin.R       distritos + barrios + municipio
+│   ├── 02_mapa_base.R             mapa base estático e interactivo
+│   ├── 03_descargar_osm.R         POIs OSM (4 capas, queries por-tag)
+│   ├── 04_kde.R                   KDE proyectado de densidades
+│   ├── 05_mapas_kde.R             lámina KDE multipanel
+│   ├── 06_mapa_pois_interactivo.R mapa filtrable de validación
+│   ├── 07_agregacion_barrios.R    HLI por barrio + ranking
+│   ├── 08_mapa_hli.R              cartografía del ranking
+│   ├── 09_renta_ine.R             cruce con ADRH 2023
+│   └── 10_visualizar_equidad.R    scatter + lámina dual
 ├── data/
 │   ├── raw/               # descargas crudas (gitignored)
-│   └── processed/         # datasets procesados
+│   └── processed/         # datasets procesados (.gpkg + .csv)
 ├── outputs/
 │   ├── maps/              # mapas interactivos HTML
-│   ├── figures/           # láminas estáticas para el README
-│   └── tables/            # tablas resumen CSV
+│   ├── figures/           # láminas estáticas
+│   └── tables/            # tablas resumen
 ├── docs/                  # publicación GitHub Pages
 └── legacy/                # versión original del notebook
 ```
 
+## Estado del proyecto
+
+| Bloque | Estado |
+|---|---|
+| Descarga y limpieza de datos administrativos | ✅ |
+| POIs OSM (comida, deporte, fast food, parques) | ✅ |
+| KDE proyectado y mapas estáticos | ✅ |
+| Mapa interactivo de validación de POIs | ✅ |
+| Agregación a 131 barrios + HLI v1 + ranking | ✅ |
+| Cartografía del HLI (estática + interactiva) | ✅ |
+| Cruce con renta INE (ADRH 2023) | ✅ |
+| Visualización del eje HLI ↔ renta | ✅ |
+| Isocronas peatonales con `dodgr` | 🚧 en curso |
+| Regla 3-30-300 (arbolado + canopy + accesibilidad) | ⏳ pendiente |
+| Dashboard `shinylive` en GitHub Pages | ⏳ pendiente |
+
+## Salidas destacadas
+
+- `outputs/figures/03_hli_choropleth.png` — coroplético del HLI por barrio.
+- `outputs/figures/05_hli_vs_renta.png` — scatter HLI ↔ renta con cuadrantes.
+- `outputs/figures/06_panel_equidad.png` — lámina dual HLI / renta.
+- `outputs/maps/02_pois_filtrable.html` — validación visual de los POIs OSM.
+- `outputs/maps/03_hli_interactivo.html` — HLI con desglose por componente.
+- `outputs/maps/04_equidad_interactivo.html` — HLI, renta y residual.
+
 ## Cómo reproducirlo
 
-> Esta sección se completará al final del proyecto.
+> Pendiente de finalización al cierre del proyecto.
 
-Requisitos previos:
+Requisitos:
 - R 4.5+
 - Rtools 4.5 (Windows)
-- Quarto
+- Quarto 1.9+
+- Una API key gratuita de [MapTiler](https://www.maptiler.com/) en `.Renviron` como `MAPTILER_API_KEY=...`
 
 ```r
 # Restaurar el entorno exacto
 renv::restore()
+
+# Pipeline completo (los scripts son idempotentes salvo R/03 que llama Overpass)
+for (s in sort(list.files("R", pattern = "^[0-9]{2}_.*\\.R$", full.names = TRUE))) {
+  message("→ ", s)
+  source(s)
+}
 
 # Renderizar el documento
 quarto::quarto_render("index.qmd")
@@ -49,30 +104,29 @@ quarto::quarto_render("index.qmd")
 
 ## Metodología
 
-> Documentación detallada en construcción. Resumen:
-
-1. **Capas de entrada** (OSM): comida saludable, gimnasios, fast food, parques.
-2. **KDE proyectado** (EPSG:25830) para densidades.
-3. **Isocronas peatonales** con `dodgr` sobre la red OSM real.
-4. **Cubierta arbórea**: arbolado del Ayto + Meta Canopy Height 1 m.
-5. **Agregación a barrios** (131 barrios de Madrid).
-6. **Cruce con renta** (INE — Atlas de Distribución de Renta de los Hogares).
+1. **Capas de entrada (OSM):** comida saludable, gimnasios, fast food, parques. Whitelist explícita de subtags validada visualmente para limpiar el ruido cruzado del parser. `landuse=forest` se excluye salvo el rescate manual de Casa de Campo (1.373 ha) que en OSM no aparece como `leisure=park`.
+2. **KDE proyectado** (EPSG:25830) con bandwidth de Scott — densidades estadísticamente correctas.
+3. **Agregación a 131 barrios:** densidad de POIs por km² + porcentaje de cubierta de parques.
+4. **HLI compuesto:** media de cuatro indicadores normalizados al rango [0, 1] con cuantiles 5–95 (robusto a outliers tipo Sol con 123 fast food/km²); fast food invertido.
+5. **Renta:** Atlas de Distribución de Renta de los Hogares 2023 del INE — agregada de sección censal a barrio del Ayuntamiento por intersección espacial (centroide).
+6. **Próximos pasos:** isocronas peatonales con `dodgr`, regla 3-30-300 (3 árboles visibles, 30% canopy, 300 m a parque ≥1 ha), dashboard `shinylive`.
 
 ## Fuentes de datos
 
 | Capa | Fuente | Licencia |
 |---|---|---|
-| POIs (gimnasios, comida, fast food) | OpenStreetMap | ODbL |
-| Distritos y barrios | Ayuntamiento de Madrid | CC BY 4.0 |
-| Renta por sección censal | INE — ADRH | Reutilización libre |
+| POIs (gimnasios, comida, fast food, parques) | OpenStreetMap (Overpass API) | ODbL |
+| Distritos y barrios | Ayuntamiento de Madrid (Geoportal IDEAM) | CC BY 4.0 |
+| Renta por sección censal | INE — Atlas de Distribución de Renta de los Hogares 2023 (tabla 30824) | Reutilización libre |
+| Cartografía secciones censales | INE — Cartografía Digitalizada 2024 | Reutilización libre |
 | Arbolado urbano | Ayuntamiento de Madrid | CC BY 4.0 |
-| Cubierta arbórea | Meta/WRI Global Canopy Height 2024 | CC BY 4.0 |
+| Cubierta arbórea | Meta/WRI Global Canopy Height 1 m 2024 | CC BY 4.0 |
 | Basemaps | MapTiler | API key personal |
 
 ## Autor
 
-**Miguel Ferreiro García** — Proyecto inicialmente desarrollado en un curso de SIG con R, refactorizado en 2026 como pieza de portfolio.
+**Miguel Ferreiro García** — proyecto inicialmente desarrollado en un curso de SIG con R, refactorizado en 2026 como pieza de portfolio.
 
 ## Licencia
 
-[MIT](LICENSE) — código. Datos bajo sus respectivas licencias originales.
+[MIT](LICENSE) para el código. Datos bajo sus respectivas licencias originales.
