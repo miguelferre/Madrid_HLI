@@ -57,8 +57,8 @@ mapa_kde <- function(r, titulo, subtitulo, paleta) {
     )
 }
 
-p1 <- mapa_kde(kde_a, "Comida saludable",  "Fruterías, mercados, herbolarios y especializadas", viridis(20, option = "G"))
-p2 <- mapa_kde(kde_g, "Actividad física",  "Gimnasios, polideportivos y estaciones de calistenia", viridis(20, option = "D"))
+p1 <- mapa_kde(kde_a, "Comida saludable",  "Fruterías, mercados, dietéticas y venta directa de granja", viridis(20, option = "G"))
+p2 <- mapa_kde(kde_g, "Actividad física",  "Gimnasios, polideportivos y estaciones de calistenia",     viridis(20, option = "D"))
 p3 <- mapa_kde(kde_f, "Comida rápida",     "Fast food (factor inverso del índice)",                viridis(20, option = "B"))
 
 panel <- (p1 | p2 | p3) +

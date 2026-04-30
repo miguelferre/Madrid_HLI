@@ -204,6 +204,37 @@ if (!is.null(parques) && nrow(parques) > 0) {
   parques <- parques[parques$area_m2 >= 1000, ]
 }
 
+# Whitelists -------------------------------------------------------------------
+# El parser de osmdata trae nodos accesorios con tags cruzados (parking,
+# supermarket, optician…). Filtramos a la whitelist limpia validada con el
+# usuario en outputs/maps/02_pois_filtrable.html.
+
+WL_COMIDA   <- c("greengrocer", "marketplace", "health_food", "farm")
+WL_DEPORTE  <- c("sports_centre", "fitness_station", "fitness_centre")
+WL_FASTFOOD <- c("fast_food")
+
+# Parques: base = leisure=park. Excluimos landuse=forest porque OSM mete dentro
+# del polígono forest del Pardo el casco urbano residencial (~4.000 hab.) y
+# además el resto de polígonos forest grandes son ruido (Aeropuerto, Cuatro
+# Vientos, Casco Histórico Vallecas). PERO rescatamos por nombre los parques
+# urbanos emblemáticos que en OSM solo están etiquetados como forest, no park.
+WL_PARQUES         <- c("park")
+RESCATE_FOREST     <- c("Casa de Campo")
+
+if (!is.null(comida_saludable))
+  comida_saludable <- comida_saludable[comida_saludable$tipo %in% WL_COMIDA, ]
+if (!is.null(gimnasios))
+  gimnasios <- gimnasios[gimnasios$tipo %in% WL_DEPORTE, ]
+if (!is.null(fast_food))
+  fast_food <- fast_food[fast_food$tipo %in% WL_FASTFOOD, ]
+if (!is.null(parques)) {
+  mantener <- parques$tipo %in% WL_PARQUES |
+              (parques$tipo == "forest" & parques$name %in% RESCATE_FOREST)
+  parques <- parques[mantener, ]
+  # Reetiquetamos los rescatados a "park" para coherencia downstream
+  parques$tipo[parques$name %in% RESCATE_FOREST] <- "park"
+}
+
 # Guardar ----------------------------------------------------------------------
 
 guardar <- function(x, ruta) {
